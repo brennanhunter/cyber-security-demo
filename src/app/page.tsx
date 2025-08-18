@@ -1,103 +1,154 @@
-import Image from "next/image";
+import { Button } from '@/components/ui/button'
+import { GlitchText } from '@/components/animations/glitch-text'
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-raisin-black text-ghost-white">
+      {/* Hero Section */}
+      <section className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
+        <div className="max-w-4xl mx-auto">
+          {/* Logo placeholder */}
+          <div className="mb-8">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+              <span className="text-steel-pink">S.C.P</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-300 mb-2">
+              Secure • Contain • Protect
+            </p>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+          {/* Main Heading with Glitch Effect */}
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <GlitchText 
+              text="World-Leading Cybersecurity"
+              className="block mb-2"
+              intensity="medium"
+              trigger="hover"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <span className="text-gradient-cyber">Powered By AI</span>
+          </h2>
+
+          {/* Subtitle */}
+          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Standing as the Ultimate Defenders of the Global Digital Ecosystem, 
+            Protecting Connections, Empowering Innovations, and Securing a Resilient 
+            Future for Generations to Come
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button variant="primary" size="lg" className="pulse-glow">
+              Get Started
+            </Button>
+            <Button variant="cyber" size="lg">
+              Schedule A Demonstration
+            </Button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="animate-bounce">
+            <svg 
+              className="w-6 h-6 text-steel-pink" 
+              fill="none" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth="2" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-2xl md:text-4xl font-bold text-center mb-12">
+            Foundation <span className="text-steel-pink">Established</span>
+          </h3>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Color Palette Demo */}
+            <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+              <h4 className="text-xl font-semibold mb-4 text-steel-pink">Color Palette</h4>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-steel-pink"></div>
+                  <span className="text-sm">Steel Pink (#D108CE)</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-finn-purple"></div>
+                  <span className="text-sm">Finn Purple (#511F64)</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-cyber-cyan"></div>
+                  <span className="text-sm">Cyber Cyan (#00F5FF)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Animations Demo */}
+            <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+              <h4 className="text-xl font-semibold mb-4 text-cyber-cyan">Animations</h4>
+              <div className="space-y-4">
+                <div>
+                  <GlitchText 
+                    text="Glitch Effect" 
+                    className="text-lg"
+                    intensity="high"
+                    trigger="hover"
+                  />
+                </div>
+                <div className="pulse-glow bg-steel-pink/20 p-3 rounded">
+                  Pulse Glow Effect
+                </div>
+                <div className="loading-dots">
+                  Loading Animation
+                </div>
+              </div>
+            </div>
+
+            {/* Components Demo */}
+            <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+              <h4 className="text-xl font-semibold mb-4 text-electric-blue">Components</h4>
+              <div className="space-y-3">
+                <Button variant="primary" size="sm" className="w-full">
+                  Primary Button
+                </Button>
+                <Button variant="secondary" size="sm" className="w-full">
+                  Secondary Button
+                </Button>
+                <Button variant="ghost" size="sm" className="w-full">
+                  Ghost Button
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Development Status */}
+          <div className="mt-16 text-center">
+            <div className="bg-gray-800/30 rounded-lg p-8 border border-gray-700">
+              <h4 className="text-2xl font-bold mb-4">
+                Development Status: <span className="text-gradient-primary">Foundation Phase</span>
+              </h4>
+              <p className="text-gray-300 mb-6">
+                ✅ Tailwind CSS v4 Configuration<br />
+                ✅ Custom Color Palette Integration<br />
+                ✅ Animation Utilities Setup<br />
+                ✅ Component Architecture Planning<br />
+                🔄 Ready for Phase 2 Development
+              </p>
+              <Button variant="cyber" size="lg">
+                View Development Roadmap
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  );
+  )
 }

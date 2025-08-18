@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SCP Cybersecurity Website
 
-## Getting Started
+🚀 **World-Leading Cybersecurity, Powered By AI**
 
-First, run the development server:
+A cutting-edge cybersecurity company website built with Next.js 15, Tailwind CSS v4, and modern web technologies. This project emphasizes high-quality design, security best practices, and cyberpunk aesthetics.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🎨 Features
+
+- **Custom Color Palette**: Steel Pink, Finn Purple, Cyber Cyan theme
+- **Advanced Animations**: Glitch effects, pulse glow, loading animations
+- **Tailwind CSS v4**: Modern CSS-first configuration
+- **TypeScript**: Full type safety
+- **Responsive Design**: Mobile-first approach
+- **Security-First**: Built with cybersecurity best practices
+
+## 🏗️ Current Status
+
+✅ **Foundation Complete**
+- Next.js 15 with App Router
+- Tailwind CSS v4 configuration
+- Custom color system integration
+- Basic component architecture
+- Animation utilities
+- Development roadmap
+
+## 🎨 Color Palette
+
+```css
+--steel-pink: #D108CE     /* Primary brand color */
+--finn-purple: #511F64    /* Secondary brand color */
+--raisin-black: #212227   /* Background color */
+--cyber-cyan: #00F5FF     /* Accent color */
+--electric-blue: #7DF9FF  /* Accent color */
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Quick Start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Start development server**
+   ```bash
+   npm run dev
+   ```
 
-## Learn More
+3. **Open browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/                 # Next.js App Router
+├── components/
+│   ├── ui/             # Reusable UI components
+│   ├── animations/     # Animation components
+│   └── layout/         # Layout components
+├── lib/                # Utilities and helpers
+├── constants/          # App constants and theme
+└── types/              # TypeScript definitions
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎯 Available Components
 
-## Deploy on Vercel
+### UI Components
+- **Button**: Multiple variants (primary, secondary, ghost, cyber)
+- **GlitchText**: Cyberpunk-style text animation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Animation Classes
+- `.glitch-text`: Glitch effect for text
+- `.pulse-glow`: Pulsing glow animation
+- `.loading-dots`: Loading animation with dots
+- `.gradient-primary`: Steel pink to finn purple gradient
+- `.gradient-cyber`: Cyber cyan to electric blue gradient
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15
+- **Styling**: Tailwind CSS v4
+- **Language**: TypeScript
+- **Package Manager**: npm
+- **Development**: Hot reload, fast refresh
+
+## 📋 Next Steps
+
+Follow the detailed roadmap in `DEVLOG.md` for the next development phases:
+
+1. **Phase 1**: Core UI Components & Navigation
+2. **Phase 2**: Advanced Animations & GSAP Integration  
+3. **Phase 3**: Content Architecture & SEO
+4. **Phase 4**: Security Implementation
+5. **Phase 5**: Testing & Optimization
+
+## 🔒 Security Features (Planned)
+
+- DOMPurify for XSS protection
+- reCAPTCHA integration
+- Security headers and CSP
+- Input validation and sanitization
+- Rate limiting and CSRF protection
+
+## 📚 Development Resources
+
+- [DEVLOG.md](./DEVLOG.md) - Detailed development roadmap
+- [Tailwind CSS v4 Docs](https://tailwindcss.com/docs/v4-beta)
+- [Next.js Documentation](https://nextjs.org/docs)
+
+## 🎨 Design Inspiration
+
+Reference websites for UI/UX inspiration:
+- [Armis](https://www.armis.com) - Color schemes
+- [SentinelOne](https://www.sentinelone.com/) - Layout design
+- [Checkmarx](https://checkmarx.com/) - Interactive elements
+
+---
+
+**Project Status**: Foundation Phase Complete ✅  
+**Next Phase**: Core Components & Navigation  
+**Last Updated**: August 18, 2025
