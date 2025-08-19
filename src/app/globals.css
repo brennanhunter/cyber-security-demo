@@ -145,6 +145,179 @@ body {
   }
 }
 
+/* Fade in up animation for testimonials */
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3D Metallic Shapes for Case Studies */
+.metallic-cube {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateCube 8s infinite linear;
+}
+
+.metallic-cube::before,
+.metallic-cube::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+}
+
+.metallic-cube::before {
+  background: linear-gradient(135deg, 
+    var(--steel-pink) 0%, 
+    var(--cyber-cyan) 30%, 
+    var(--ghost-white) 50%, 
+    var(--cyber-cyan) 70%, 
+    var(--steel-pink) 100%);
+  transform: rotateY(0deg) translateZ(40px);
+  box-shadow: 
+    0 0 20px rgba(209, 8, 206, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.metallic-cube::after {
+  background: linear-gradient(225deg, 
+    var(--finn-purple) 0%, 
+    var(--deep-purple) 50%, 
+    var(--steel-pink) 100%);
+  transform: rotateY(90deg) translateZ(40px);
+  box-shadow: 
+    0 0 15px rgba(0, 245, 255, 0.2),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+.metallic-pyramid {
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 80px solid;
+  border-image: linear-gradient(135deg, 
+    var(--cyber-cyan) 0%, 
+    var(--electric-blue) 50%, 
+    var(--ghost-white) 100%) 1;
+  position: relative;
+  animation: floatPyramid 6s ease-in-out infinite;
+  filter: drop-shadow(0 10px 20px rgba(0, 245, 255, 0.3));
+}
+
+.metallic-sphere {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, 
+    var(--ghost-white) 0%, 
+    var(--cyber-cyan) 30%, 
+    var(--steel-pink) 70%, 
+    var(--deep-purple) 100%);
+  position: relative;
+  animation: pulseSphere 4s ease-in-out infinite;
+  box-shadow: 
+    0 0 30px rgba(209, 8, 206, 0.4),
+    inset -10px -10px 20px rgba(0, 0, 0, 0.3),
+    inset 10px 10px 20px rgba(255, 255, 255, 0.1);
+}
+
+.metallic-sphere::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  filter: blur(8px);
+}
+
+@keyframes rotateCube {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+@keyframes floatPyramid {
+  0%, 100% { transform: translateY(0px) rotateZ(0deg); }
+  50% { transform: translateY(-20px) rotateZ(180deg); }
+}
+
+@keyframes pulseSphere {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 
+      0 0 30px rgba(209, 8, 206, 0.4),
+      inset -10px -10px 20px rgba(0, 0, 0, 0.3),
+      inset 10px 10px 20px rgba(255, 255, 255, 0.1);
+  }
+  50% { 
+    transform: scale(1.1);
+    box-shadow: 
+      0 0 40px rgba(0, 245, 255, 0.6),
+      inset -10px -10px 20px rgba(0, 0, 0, 0.2),
+      inset 10px 10px 20px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Case study card image styling */
+.case-study-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Case study hover modal */
+.case-study-hover-modal {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  margin-left: 16px;
+  width: 384px;
+  background: linear-gradient(135deg, rgba(209, 8, 206, 0.15), rgba(81, 31, 100, 0.1), rgba(45, 27, 105, 0.15));
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(209, 8, 206, 0.4);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 30px rgba(209, 8, 206, 0.2);
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-10px);
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.case-study-card:hover .case-study-hover-modal,
+.case-study-hover-modal:hover {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateX(0) !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure parent containers don't clip the modal */
+.case-studies-grid {
+  overflow: visible !important;
+}
+
+/* Make sure the card itself allows overflow */
+.case-study-card {
+  overflow: visible !important;
+}
+
 /* Loading animation utilities */
 .loading-dots::after {
   content: '';

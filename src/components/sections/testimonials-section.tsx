@@ -160,11 +160,16 @@ export default function TestimonialsSection() {
 
         {/* Testimonials Grid - Full Width */}
         <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12 w-full">
-            {visibleTestimonials.map((testimonial) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12 w-full transition-all duration-700 ease-in-out">
+            {visibleTestimonials.map((testimonial, index) => (
               <div
                 key={testimonial.id}
-                className={`${testimonial.gridClass} group relative rounded-2xl bg-gradient-to-br ${testimonial.bgClass} backdrop-blur-sm border ${testimonial.borderClass} p-6 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${testimonial.shadowClass}`}
+                className={`${testimonial.gridClass} group relative rounded-2xl bg-gradient-to-br ${testimonial.bgClass} backdrop-blur-sm border ${testimonial.borderClass} p-6 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${testimonial.shadowClass} ${
+                  index >= 6 ? 'animate-fadeInUp' : ''
+                }`}
+                style={{
+                  animationDelay: index >= 6 ? `${(index - 6) * 100}ms` : '0ms'
+                }}
               >
                 {/* Glassmorphism overlay */}
                 <div className="absolute inset-0 bg-white/5 rounded-2xl backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -214,7 +219,7 @@ export default function TestimonialsSection() {
           
           {/* Fade out overlay when not showing all */}
           {!showAll && (
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-raisin-black via-raisin-black/80 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-raisin-black via-raisin-black/80 to-transparent pointer-events-none transition-opacity duration-700 ease-in-out" />
           )}
         </div>
 
@@ -226,15 +231,17 @@ export default function TestimonialsSection() {
             onClick={() => setShowAll(!showAll)}
             className="border-2 border-cyber-cyan/60 text-cyber-cyan hover:text-raisin-black hover:bg-cyber-cyan shadow-lg hover:shadow-cyber-cyan/50 transition-all duration-500 transform hover:scale-105"
           >
-            {showAll ? 'Show Less' : 'Read More Testimonials'}
-            <svg 
-              className={`ml-2 w-4 h-4 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`}
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
+            <span className="flex items-center">
+              {showAll ? 'Show Less' : 'Read More Testimonials'}
+              <svg 
+                className={`ml-2 w-4 h-4 transition-transform duration-500 ease-in-out ${showAll ? 'rotate-180' : ''}`}
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
           </Button>
         </div>
 
