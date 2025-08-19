@@ -160,7 +160,7 @@ export default function CaseStudiesSection() {
 
         {/* Compact Case Study Cards */}
         <div className="case-studies-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {caseStudies.map((study, index) => (
+          {caseStudies.map((study) => (
             <div
               key={study.id}
               className="case-study-card group relative rounded-2xl bg-gradient-to-br from-steel-pink/10 via-finn-purple/5 to-deep-purple/10 backdrop-blur-sm border border-steel-pink/30 transition-all duration-500 hover:shadow-2xl hover:shadow-steel-pink/20 cursor-pointer"

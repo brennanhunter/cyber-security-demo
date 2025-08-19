@@ -96,7 +96,7 @@ export default function ServicesSection() {
               Enterprise Cybersecurity Services
             </h2>
             <p className="body-large text-center max-w-3xl mx-auto">
-              Our comprehensive security solutions protect the world's most innovative companies 
+              Our comprehensive security solutions protect the world&apos;s most innovative companies 
               from evolving cyber threats through cutting-edge technology and expert analysis.
             </p>
           </div>

@@ -59,7 +59,7 @@ export default function StackingCards() {
         marginBottom: cardMargin
       }}
     >
-      {cards.map((card, index) => (
+      {cards.map((card) => (
         <div
           key={card.id}
           className="sticky will-change-transform"

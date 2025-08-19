@@ -196,7 +196,7 @@ export default function TestimonialsSection() {
 
                   {/* Quote */}
                   <blockquote className="flex-1 text-ghost-white/90 text-sm leading-relaxed mb-4">
-                    "{testimonial.quote}"
+                    &quot;{testimonial.quote}&quot;
                   </blockquote>
 
                   {/* Rating */}
@@ -248,7 +248,7 @@ export default function TestimonialsSection() {
         {/* CTA Section */}
         <div className="text-center">
           <p className="body-text mb-6">
-            Ready to join our satisfied clients? Let's secure your digital future.
+            Ready to join our satisfied clients? Let&apos;s secure your digital future.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 

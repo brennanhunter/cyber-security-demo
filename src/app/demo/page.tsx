@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Schedule A Demonstration | S.C.P Cybersecurity',
-  description: 'See S.C.P\'s world-leading cybersecurity solutions in action. Book your personalized security demonstration today.',
+  description: 'See S.C.P&apos;s world-leading cybersecurity solutions in action. Book your personalized security demonstration today.',
   keywords: ['cybersecurity demo', 'security demonstration', 'penetration testing demo'],
 }
 
@@ -19,7 +19,7 @@ export default function DemoPage() {
               </span>
             </h1>
             <p className="text-xl text-gray-300 mb-8">
-              See S.C.P's world-leading cybersecurity solutions in action
+              See S.C.P&apos;s world-leading cybersecurity solutions in action
             </p>
             <div className="bg-gray-800/50 rounded-lg p-8 border border-gray-700 max-w-2xl mx-auto">
               <p className="text-gray-300">

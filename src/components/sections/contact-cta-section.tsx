@@ -35,7 +35,7 @@ export default function ContactCtaSection() {
 
         {/* Subtext */}
         <p className="text-xl md:text-2xl text-ghost-white/80 mb-8 leading-relaxed max-w-3xl mx-auto">
-          Don't wait for a security breach to take action. Our expert team is ready to fortify your digital infrastructure with cutting-edge cybersecurity solutions.
+          Don&apos;t wait for a security breach to take action. Our expert team is ready to fortify your digital infrastructure with cutting-edge cybersecurity solutions.
         </p>
 
         {/* Stats Row */}

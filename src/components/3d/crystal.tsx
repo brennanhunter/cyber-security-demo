@@ -49,7 +49,7 @@ export default function Crystal({
       )
       
       // Emissive intensity pulse
-      material.emissiveIntensity = 0.3 + Math.sin(time * 4) * 0.2
+      material.emissiveIntensity = intensity * 0.3 + Math.sin(time * 4) * 0.2
     }
   })
 
@@ -61,7 +61,7 @@ export default function Crystal({
         <meshStandardMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={0.3}
+          emissiveIntensity={intensity * 0.3}
           metalness={0.1}
           roughness={0.2}
           transparent
