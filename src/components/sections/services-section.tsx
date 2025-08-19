@@ -100,80 +100,92 @@ export default function ServicesSection() {
             </p>
           </div>
           
-          {/* Services cards - three featured services */}
-          <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Services cards - three rows layout */}
+          <div className="mt-16 w-4/5 mx-auto space-y-[45px]">
             {/* Penetration Testing Card */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-steel-pink/10 to-finn-purple/20 backdrop-blur-sm border border-steel-pink/30 hover:border-steel-pink/60 transition-all duration-500 hover:transform hover:scale-105">
-              <div className="relative h-64 overflow-hidden">
-                <img 
-                  src="/images/Lock.jpg" 
-                  alt="Ultimate Penetration Testing"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-raisin-black/80 via-transparent to-transparent" />
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-ghost-white mb-4 group-hover:text-steel-pink transition-colors duration-300">
-                  Ultimate Penetration Testing
-                </h3>
-                <p className="body-text mb-6">
-                  The best possible security is hardened with the most comprehensive 
-                  security testing available— simulated attacks performed by the 
-                  industry's best white hat hackers.
-                </p>
-                <Button variant="ghost" size="lg" className="hover:shadow-lg hover:shadow-steel-pink/25 transform hover:scale-105">
-                  Know More
-                </Button>
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-steel-pink/10 to-finn-purple/20 backdrop-blur-sm border border-steel-pink/30 hover:border-steel-pink/60 transition-all duration-500 hover:transform hover:scale-105 h-80">
+              <div className="flex h-full">
+                <div className="relative w-2/5 overflow-hidden">
+                  <img 
+                    src="/images/Lock.jpg" 
+                    alt="Ultimate Penetration Testing"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-raisin-black/60" />
+                </div>
+                <div className="w-3/5 p-8 flex flex-col justify-center">
+                  <h3 className="text-3xl font-bold text-ghost-white mb-4 group-hover:text-steel-pink transition-colors duration-300">
+                    Ultimate Penetration Testing
+                  </h3>
+                  <p className="body-text mb-6 text-lg">
+                    The best possible security is hardened with the most comprehensive 
+                    security testing available— simulated attacks performed by the 
+                    industry's best white hat hackers.
+                  </p>
+                  <div className="mt-auto">
+                    <Button variant="ghost" size="lg" className="hover:shadow-lg hover:shadow-steel-pink/25 transform hover:scale-105">
+                      Know More
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Red Team Operations Card */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-finn-purple/10 to-deep-purple/20 backdrop-blur-sm border border-finn-purple/30 hover:border-finn-purple/60 transition-all duration-500 hover:transform hover:scale-105">
-              <div className="relative h-64 overflow-hidden">
-                <img 
-                  src="/images/Planet.jpg" 
-                  alt="Red Team Operations"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-raisin-black/80 via-transparent to-transparent" />
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-ghost-white mb-4 group-hover:text-finn-purple transition-colors duration-300">
-                  Red Team Operations
-                </h3>
-                <p className="body-text mb-6">
-                  Advanced persistent threat simulation using real-world attack 
-                  scenarios to test your organization's detection and response 
-                  capabilities against sophisticated adversaries.
-                </p>
-                <Button variant="secondary" size="lg" className="hover:shadow-lg hover:shadow-finn-purple/25 transform hover:scale-105">
-                  Know More
-                </Button>
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-finn-purple/10 to-deep-purple/20 backdrop-blur-sm border border-finn-purple/30 hover:border-finn-purple/60 transition-all duration-500 hover:transform hover:scale-105 h-80">
+              <div className="flex h-full">
+                <div className="w-3/5 p-8 flex flex-col justify-center">
+                  <h3 className="text-3xl font-bold text-ghost-white mb-4 group-hover:text-finn-purple transition-colors duration-300">
+                    Red Team Operations
+                  </h3>
+                  <p className="body-text mb-6 text-lg">
+                    Advanced persistent threat simulation using real-world attack 
+                    scenarios to test your organization's detection and response 
+                    capabilities against sophisticated adversaries.
+                  </p>
+                  <div className="mt-auto">
+                    <Button variant="secondary" size="lg" className="hover:shadow-lg hover:shadow-finn-purple/25 transform hover:scale-105">
+                      Know More
+                    </Button>
+                  </div>
+                </div>
+                <div className="relative w-2/5 overflow-hidden">
+                  <img 
+                    src="/images/Planet.jpg" 
+                    alt="Red Team Operations"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-raisin-black/60" />
+                </div>
               </div>
             </div>
 
             {/* Security Training Card */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyber-cyan/10 to-electric-blue/20 backdrop-blur-sm border border-cyber-cyan/30 hover:border-cyber-cyan/60 transition-all duration-500 hover:transform hover:scale-105">
-              <div className="relative h-64 overflow-hidden">
-                <img 
-                  src="/images/TechWave.webp" 
-                  alt="Security Training"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-raisin-black/80 via-transparent to-transparent" />
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-ghost-white mb-4 group-hover:text-cyber-cyan transition-colors duration-300">
-                  Security Awareness Training
-                </h3>
-                <p className="body-text mb-6">
-                  Comprehensive cybersecurity education programs designed to 
-                  transform your workforce into your strongest defense against 
-                  social engineering and phishing attacks.
-                </p>
-                <Button variant="cyber" size="lg" className="hover:shadow-lg hover:shadow-cyber-cyan/25 transform hover:scale-105">
-                  Know More
-                </Button>
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyber-cyan/10 to-electric-blue/20 backdrop-blur-sm border border-cyber-cyan/30 hover:border-cyber-cyan/60 transition-all duration-500 hover:transform hover:scale-105 h-80">
+              <div className="flex h-full">
+                <div className="relative w-2/5 overflow-hidden">
+                  <img 
+                    src="/images/TechWave.webp" 
+                    alt="Security Training"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-raisin-black/60" />
+                </div>
+                <div className="w-3/5 p-8 flex flex-col justify-center">
+                  <h3 className="text-3xl font-bold text-ghost-white mb-4 group-hover:text-cyber-cyan transition-colors duration-300">
+                    Security Awareness Training
+                  </h3>
+                  <p className="body-text mb-6 text-lg">
+                    Comprehensive cybersecurity education programs designed to 
+                    transform your workforce into your strongest defense against 
+                    social engineering and phishing attacks.
+                  </p>
+                  <div className="mt-auto">
+                    <Button variant="cyber" size="lg" className="hover:shadow-lg hover:shadow-cyber-cyan/25 transform hover:scale-105">
+                      Know More
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
