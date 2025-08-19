@@ -99,6 +99,10 @@ body {
   background: linear-gradient(135deg, var(--cyber-cyan) 0%, var(--electric-blue) 100%);
 }
 
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
 .text-gradient-primary {
   background: linear-gradient(135deg, var(--steel-pink) 0%, var(--finn-purple) 100%);
   -webkit-background-clip: text;
@@ -124,6 +128,20 @@ body {
   }
   to {
     box-shadow: 0 0 20px var(--cyber-cyan), 0 0 30px var(--cyber-cyan), 0 0 40px var(--cyber-cyan);
+  }
+}
+
+/* Infinite scrolling animation */
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
