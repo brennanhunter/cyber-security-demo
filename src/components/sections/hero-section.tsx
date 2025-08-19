@@ -1,8 +1,13 @@
 'use client'
 
+import { useRef } from 'react'
 import CrystalScene from '@/components/3d/lightning-scene'
+import { Button } from '@/components/ui/button'
+import ScrambleText, { ScrambleTextHandle } from '@/components/animations/scramble-text'
 
 export default function HeroSection() {
+  const primaryBtnRef = useRef<ScrambleTextHandle>(null)
+  const secondaryBtnRef = useRef<ScrambleTextHandle>(null)
   return (
     <section className="relative min-h-screen flex items-center justify-between bg-raisin-black overflow-hidden">
       {/* Fire-like gradient background */}
@@ -66,8 +71,8 @@ export default function HeroSection() {
           </h1>
           
           {/* Subheading */}
-          <h2 className="text-4xl lg:text-5xl font-semibold text-gradient-cyber leading-tight">
-            Secure. Control. Protect.
+          <h2 className="text-4xl lg:text-5xl font-semibold leading-tight">
+            <span className="glitch-gradient text-gradient-cyber" data-text="Secure. Control. Protect.">Secure. Control. Protect.</span>
           </h2>
           
           {/* Description */}
@@ -93,14 +98,44 @@ export default function HeroSection() {
             </div>
           </div>
           
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-8 py-4 gradient-primary text-ghost-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-              Schedule Assessment
-            </button>
-            <button className="px-8 py-4 border-2 border-steel-pink text-steel-pink hover:bg-steel-pink hover:text-raisin-black font-semibold rounded-lg transition-all duration-300">
-              View Case Studies
-            </button>
+          {/* CTA Buttons with Glow Effects */}
+          <div className="flex flex-col sm:flex-row gap-6">
+            <Button 
+              variant="primary" 
+              size="lg" 
+              className="relative overflow-hidden bg-gradient-to-r from-steel-pink to-finn-purple hover:from-steel-pink/90 hover:to-finn-purple/90 shadow-2xl hover:shadow-steel-pink/50 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 border border-steel-pink/30 pulse-glow group"
+              onMouseEnter={() => primaryBtnRef.current?.startScramble()}
+            >
+              <span className="relative z-10 font-semibold tracking-wide">
+                <ScrambleText 
+                  ref={primaryBtnRef}
+                  speed={30}
+                  scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*(){}[]"
+                >
+                  Schedule Security Assessment
+                </ScrambleText>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-steel-pink/20 to-finn-purple/20 animate-pulse" />
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              className="relative group border-2 border-cyber-cyan/60 text-cyber-cyan hover:text-raisin-black hover:bg-cyber-cyan shadow-lg hover:shadow-cyber-cyan/50 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 backdrop-blur-sm bg-raisin-black/20"
+              onMouseEnter={() => secondaryBtnRef.current?.startScramble()}
+            >
+              <span className="relative z-10 font-semibold tracking-wide">
+                <ScrambleText 
+                  ref={secondaryBtnRef}
+                  speed={40}
+                  scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*(){}[]"
+                >
+                  View Case Studies
+                </ScrambleText>
+              </span>
+              <div className="absolute inset-0 bg-cyber-cyan/10 group-hover:bg-cyber-cyan transition-all duration-500 rounded-lg" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyber-cyan/50 to-electric-blue/50 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+            </Button>
           </div>
         </div>
         

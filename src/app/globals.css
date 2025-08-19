@@ -257,6 +257,47 @@ body {
   will-change: transform;
 }
 
+/* Glitch Effect for Gradient Text */
+.glitch-gradient {    
+  cursor: pointer;
+  position: relative;
+  z-index: 550;
+  display: inline-block;
+}
+
+.glitch-gradient::before,
+.glitch-gradient::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  background: linear-gradient(135deg, var(--cyber-cyan) 0%, var(--electric-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glitch-gradient::before {
+  animation: glitchTop 2s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  will-change: transform;
+}
+
+.glitch-gradient::after {
+  animation: glitchBottom 2.2s infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  will-change: transform;
+}
+
 @keyframes glitchTop {
   0%, 85% {
     transform: translate(0, 0);
