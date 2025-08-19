@@ -28,6 +28,41 @@
   --color-electric-blue: #7DF9FF;
   --color-neon-pink: #FF073A;
   --color-ghost-white: #F8F8FF;
+  
+  /* Font Families */
+  --font-family-sans: var(--font-inter);
+  --font-family-mono: var(--font-jetbrains-mono);
+  
+  /* Typography Scale - Cybersecurity Professional */
+  --font-size-xs: 0.75rem;     /* 12px - Small labels, captions */
+  --font-size-sm: 0.875rem;    /* 14px - Body small, form labels */
+  --font-size-base: 1rem;      /* 16px - Default body text */
+  --font-size-lg: 1.125rem;    /* 18px - Large body, subtitles */
+  --font-size-xl: 1.25rem;     /* 20px - Small headings */
+  --font-size-2xl: 1.5rem;     /* 24px - Section headings */
+  --font-size-3xl: 1.875rem;   /* 30px - Page headings */
+  --font-size-4xl: 2.25rem;    /* 36px - Large headings */
+  --font-size-5xl: 3rem;       /* 48px - Hero headings */
+  --font-size-6xl: 3.75rem;    /* 60px - Main hero */
+  --font-size-7xl: 4.5rem;     /* 72px - Display text */
+  --font-size-8xl: 6rem;       /* 96px - Large display */
+  --font-size-9xl: 8rem;       /* 128px - Massive display */
+  
+  /* Line Heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  
+  /* Letter Spacing */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
 }
 
 @media (prefers-color-scheme: light) {
@@ -37,11 +72,18 @@
   }
 }
 
+html {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background: var(--background);
+  background: #212227; /* raisin-black */
   color: var(--foreground);
   font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 /* Custom utility classes for SCP theming */
@@ -71,57 +113,6 @@ body {
   background-clip: text;
 }
 
-/* Glitch effect utilities */
-.glitch-text {
-  position: relative;
-  color: var(--ghost-white);
-  font-weight: 700;
-}
-
-.glitch-text::before,
-.glitch-text::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.glitch-text::before {
-  animation: glitch-anim-1 0.5s infinite linear alternate-reverse;
-  color: var(--steel-pink);
-  z-index: -1;
-}
-
-.glitch-text::after {
-  animation: glitch-anim-2 0.5s infinite linear alternate-reverse;
-  color: var(--cyber-cyan);
-  z-index: -2;
-}
-
-@keyframes glitch-anim-1 {
-  0% { clip-path: polygon(0 0%, 100% 0%, 100% 5%, 0 5%); }
-  10% { clip-path: polygon(0 15%, 100% 15%, 100% 25%, 0 25%); }
-  20% { clip-path: polygon(0 35%, 100% 35%, 100% 45%, 0 45%); }
-  30% { clip-path: polygon(0 55%, 100% 55%, 100% 65%, 0 65%); }
-  40% { clip-path: polygon(0 75%, 100% 75%, 100% 85%, 0 85%); }
-  50% { clip-path: polygon(0 95%, 100% 95%, 100% 100%, 0 100%); }
-  60% { clip-path: polygon(0 0%, 100% 0%, 100% 0%, 0 0%); }
-  100% { clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0 100%); }
-}
-
-@keyframes glitch-anim-2 {
-  0% { clip-path: polygon(0 85%, 100% 85%, 100% 95%, 0 95%); }
-  10% { clip-path: polygon(0 65%, 100% 65%, 100% 75%, 0 75%); }
-  20% { clip-path: polygon(0 45%, 100% 45%, 100% 55%, 0 55%); }
-  30% { clip-path: polygon(0 25%, 100% 25%, 100% 35%, 0 35%); }
-  40% { clip-path: polygon(0 5%, 100% 5%, 100% 15%, 0 15%); }
-  50% { clip-path: polygon(0 0%, 100% 0%, 100% 5%, 0 5%); }
-  60% { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); }
-  100% { clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0 100%); }
-}
-
 /* Cybersecurity themed animations */
 .pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite alternate;
@@ -149,114 +140,143 @@ body {
   80%, 100% { content: '...'; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
-}
-
-/* Custom utility classes for SCP theming */
-.gradient-primary {
-  background: linear-gradient(135deg, var(--steel-pink) 0%, var(--finn-purple) 100%);
-}
-
-.gradient-secondary {
-  background: linear-gradient(135deg, var(--finn-purple) 0%, var(--deep-purple) 100%);
-}
-
-.gradient-cyber {
-  background: linear-gradient(135deg, var(--cyber-cyan) 0%, var(--electric-blue) 100%);
-}
-
-.text-gradient-primary {
-  background: linear-gradient(135deg, var(--steel-pink) 0%, var(--finn-purple) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-cyber {
-  background: linear-gradient(135deg, var(--cyber-cyan) 0%, var(--electric-blue) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Glitch effect utilities */
-.glitch-text {
-  position: relative;
-  color: var(--ghost-white);
+/* Typography Utility Classes for SCP Cybersecurity */
+.heading-hero {
+  font-size: var(--font-size-6xl);
   font-weight: 700;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-ghost-white);
 }
 
-.glitch-text::before,
-.glitch-text::after {
+.heading-section {
+  font-size: var(--font-size-3xl);
+  font-weight: 600;
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-normal);
+  color: var(--color-ghost-white);
+}
+
+.heading-card {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  line-height: var(--line-height-snug);
+  color: var(--color-steel-pink);
+}
+
+.body-large {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-ghost-white);
+}
+
+.body-text {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: #d1d5db; /* Light gray for body text */
+}
+
+.body-small {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: #9ca3af; /* Muted gray */
+}
+
+.label-text {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-cyber-cyan);
+}
+
+.code-text {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  background: rgba(17, 24, 39, 0.8);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  color: var(--color-electric-blue);
+}
+
+/* Glitch Effect Utility */
+.glitch {    
+  cursor: pointer;
+  position: relative;
+  color: #D108CE;
+  z-index: 550;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
   content: attr(data-text);
   position: absolute;
-  top: 0;
   left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-}
-
-.glitch-text::before {
-  animation: glitch-anim-1 0.5s infinite linear alternate-reverse;
-  color: var(--steel-pink);
   z-index: -1;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
 }
 
-.glitch-text::after {
-  animation: glitch-anim-2 0.5s infinite linear alternate-reverse;
-  color: var(--cyber-cyan);
-  z-index: -2;
+.glitch::before {
+  color: #D108CE;
+  animation: glitchTop 3.5s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  will-change: transform;
 }
 
-@keyframes glitch-anim-1 {
-  0% { clip-path: polygon(0 0%, 100% 0%, 100% 5%, 0 5%); }
-  10% { clip-path: polygon(0 15%, 100% 15%, 100% 25%, 0 25%); }
-  20% { clip-path: polygon(0 35%, 100% 35%, 100% 45%, 0 45%); }
-  30% { clip-path: polygon(0 55%, 100% 55%, 100% 65%, 0 65%); }
-  40% { clip-path: polygon(0 75%, 100% 75%, 100% 85%, 0 85%); }
-  50% { clip-path: polygon(0 95%, 100% 95%, 100% 100%, 0 100%); }
-  60% { clip-path: polygon(0 0%, 100% 0%, 100% 0%, 0 0%); }
-  100% { clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0 100%); }
+.glitch::after {
+  color: #D108CE;
+  animation: glitchBottom 4s infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  will-change: transform;
 }
 
-@keyframes glitch-anim-2 {
-  0% { clip-path: polygon(0 85%, 100% 85%, 100% 95%, 0 95%); }
-  10% { clip-path: polygon(0 65%, 100% 65%, 100% 75%, 0 75%); }
-  20% { clip-path: polygon(0 45%, 100% 45%, 100% 55%, 0 55%); }
-  30% { clip-path: polygon(0 25%, 100% 25%, 100% 35%, 0 35%); }
-  40% { clip-path: polygon(0 5%, 100% 5%, 100% 15%, 0 15%); }
-  50% { clip-path: polygon(0 0%, 100% 0%, 100% 5%, 0 5%); }
-  60% { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); }
-  100% { clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0 100%); }
-}
-
-/* Cybersecurity themed animations */
-.pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes pulse-glow {
-  from {
-    box-shadow: 0 0 10px var(--steel-pink), 0 0 20px var(--steel-pink), 0 0 30px var(--steel-pink);
+@keyframes glitchTop {
+  0%, 85% {
+    transform: translate(0, 0);
   }
-  to {
-    box-shadow: 0 0 20px var(--cyber-cyan), 0 0 30px var(--cyber-cyan), 0 0 40px var(--cyber-cyan);
+  86% {
+    transform: translate(0.1em, -0.05em);
   }
-}
+  87% {
+    transform: translate(-0.05em, 0.03em);
+  }
+  88% {
+    transform: translate(0.15em, -0.02em) skew(-8deg);
+  }
+  89% {
+    transform: translate(-0.08em, 0.04em);
+  }
+  90%, 100% {
+    transform: translate(0, 0);
+  }
+}  
 
-/* Loading animation utilities */
-.loading-dots::after {
-  content: '';
-  animation: loading-dots 1.5s steps(4, end) infinite;
-}
-
-@keyframes loading-dots {
-  0%, 20% { content: ''; }
-  40% { content: '.'; }
-  60% { content: '..'; }
-  80%, 100% { content: '...'; }
+@keyframes glitchBottom {
+  0%, 87% {
+    transform: translate(0, 0);
+  }
+  88% {
+    transform: translate(-0.08em, 0.05em);
+  }
+  89% {
+    transform: translate(0.06em, -0.03em);
+  }
+  90% {
+    transform: translate(-0.12em, 0.08em) skew(12deg);
+  }
+  91% {
+    transform: translate(0.04em, -0.02em);
+  }
+  92%, 100% {
+    transform: translate(0, 0);
+  }
 }

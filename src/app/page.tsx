@@ -1,11 +1,30 @@
 import { Button } from '@/components/ui/button'
-import { GlitchText } from '@/components/animations/glitch-text'
+import PageWrapper from '@/components/layout/page-wrapper'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'S.C.P - World-Leading Cybersecurity Powered By AI',
+  description: 'Standing as the Ultimate Defenders of the Global Digital Ecosystem, Protecting Connections, Empowering Innovations, and Securing a Resilient Future for Generations to Come.',
+  keywords: ['cybersecurity', 'AI security', 'penetration testing', 'red team operations', 'cyber defense'],
+  openGraph: {
+    title: 'S.C.P - World-Leading Cybersecurity Powered By AI',
+    description: 'Standing as the Ultimate Defenders of the Global Digital Ecosystem, Protecting Connections, Empowering Innovations, and Securing a Resilient Future for Generations to Come.',
+    type: 'website',
+    siteName: 'S.C.P Cybersecurity',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'S.C.P - World-Leading Cybersecurity Powered By AI',
+    description: 'Standing as the Ultimate Defenders of the Global Digital Ecosystem, Protecting Connections, Empowering Innovations, and Securing a Resilient Future for Generations to Come.',
+  },
+}
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-raisin-black text-ghost-white">
-      {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
+    <PageWrapper>
+      <div className="min-h-screen">
+        {/* Hero Section */}
+        <section className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Logo placeholder */}
           <div className="mb-8">
@@ -19,12 +38,9 @@ export default function Home() {
 
           {/* Main Heading with Glitch Effect */}
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-            <GlitchText 
-              text="World-Leading Cybersecurity"
-              className="block mb-2"
-              intensity="medium"
-              trigger="hover"
-            />
+            <span className="glitch block mb-2" data-text="World-Leading Cybersecurity">
+              World-Leading Cybersecurity
+            </span>
             <span className="text-gradient-cyber">Powered By AI</span>
           </h2>
 
@@ -96,12 +112,9 @@ export default function Home() {
               <h4 className="text-xl font-semibold mb-4 text-cyber-cyan">Animations</h4>
               <div className="space-y-4">
                 <div>
-                  <GlitchText 
-                    text="Glitch Effect" 
-                    className="text-lg"
-                    intensity="high"
-                    trigger="hover"
-                  />
+                  <span className="glitch text-lg" data-text="Glitch Effect">
+                    Glitch Effect
+                  </span>
                 </div>
                 <div className="pulse-glow bg-steel-pink/20 p-3 rounded">
                   Pulse Glow Effect
@@ -150,5 +163,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </PageWrapper>
   )
 }

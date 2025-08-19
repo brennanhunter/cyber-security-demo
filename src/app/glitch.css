@@ -1,0 +1,55 @@
+/* New Glitch Effect - Based on working HTML example */
+.glitch {    
+    cursor: pointer !important;
+    position: relative !important;
+    color: #9747FF !important;
+    display: inline-block !important;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text) !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    color: #fff !important;
+    z-index: -1 !important;
+}
+
+.glitch::before {
+    animation: glitchTop 1s linear infinite !important;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%) !important;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%) !important;
+    will-change: transform !important;
+}
+
+.glitch::after {
+    animation: glitchBottom 1.5s linear infinite !important;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%) !important;
+    -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%) !important;
+    will-change: transform !important;
+}
+
+@keyframes glitchTop {
+    2%, 64% {
+        transform: translate(2px, -2px);
+    }
+    4%, 60% {
+        transform: translate(-2px, 2px);
+    }
+    62% {
+        transform: translate(13px, -1px) skew(-13deg);
+    }
+}  
+
+@keyframes glitchBottom {
+    2%, 64% {
+        transform: translate(-2px, 0);
+    }
+    4%, 60% {
+        transform: translate(-2px, 0);
+    }
+    62% {
+        transform: translate(-22px, 5px) skew(21deg);
+    }
+}
