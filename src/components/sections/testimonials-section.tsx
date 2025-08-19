@@ -178,7 +178,7 @@ export default function TestimonialsSection() {
                 <div className="relative z-10 h-full flex flex-col">
                   {/* User Details */}
                   <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-steel-pink/20 to-cyber-cyan/20 border border-steel-pink/30 flex items-center justify-center mr-4 text-ghost-white font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-finn-purple/25 to-cyber-cyan/20 border border-finn-purple/40 flex items-center justify-center mr-4 text-ghost-white font-bold text-lg">
                       {testimonial.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>
@@ -268,6 +268,9 @@ export default function TestimonialsSection() {
           </div>
         </div>
       </div>
+      
+      {/* Bottom gradient transition to CTA section */}
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent via-raisin-black/80 to-raisin-black" />
     </section>
   )
 }

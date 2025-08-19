@@ -4,12 +4,25 @@ import { Button } from '@/components/ui/button'
 
 export default function ContactCtaSection() {
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-raisin-black to-raisin-black/95 relative overflow-hidden">
-      {/* Background Effects */}
+    <section className="py-24 px-4 bg-raisin-black relative overflow-hidden">
+      {/* Seamless transition from testimonials */}
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-raisin-black via-raisin-black/95 to-transparent" />
+      
+      {/* Background Effects - matching testimonials glassmorphism style */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-steel-pink/10 to-cyber-cyan/10 rounded-full blur-3xl opacity-50" />
-        <div className="absolute top-20 right-20 w-32 h-32 bg-steel-pink/20 rounded-full blur-2xl" />
-        <div className="absolute bottom-20 left-20 w-32 h-32 bg-cyber-cyan/20 rounded-full blur-2xl" />
+        {/* Main central gradient with finn-purple prominence */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-steel-pink/10 via-finn-purple/15 to-cyber-cyan/10 rounded-full blur-3xl opacity-50" />
+        
+        {/* Corner accents matching testimonials style */}
+        <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-finn-purple/25 via-steel-pink/15 to-transparent rounded-full blur-2xl" />
+        <div className="absolute bottom-20 left-20 w-32 h-32 bg-gradient-to-br from-finn-purple/20 to-cyber-cyan/20 rounded-full blur-2xl" />
+        
+        {/* Additional ambient effects */}
+        <div className="absolute top-1/3 left-1/4 w-24 h-24 bg-steel-pink/15 rounded-full blur-xl" />
+        <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-finn-purple/20 rounded-full blur-xl" />
+        
+        {/* Subtle glassmorphism overlay similar to testimonials */}
+        <div className="absolute inset-0 bg-gradient-to-br from-finn-purple/5 via-transparent to-cyber-cyan/5" />
       </div>
 
       <div className="max-w-4xl mx-auto text-center relative z-10">

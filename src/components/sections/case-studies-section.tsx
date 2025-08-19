@@ -133,8 +133,9 @@ export default function CaseStudiesSection() {
     <section className="py-24 px-4 bg-gradient-to-b from-raisin-black via-raisin-black/95 to-raisin-black relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-steel-pink/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyber-cyan/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-steel-pink/8 via-finn-purple/6 to-deep-purple/4 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-tl from-cyber-cyan/8 via-finn-purple/6 to-steel-pink/4 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-finn-purple/10 rounded-full blur-2xl" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
