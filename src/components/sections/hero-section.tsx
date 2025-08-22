@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef } from 'react'
-import CrystalScene from '@/components/3d/lightning-scene'
 import { Button } from '@/components/ui/button'
 import ScrambleText, { ScrambleTextHandle } from '@/components/animations/scramble-text'
 
@@ -38,6 +37,8 @@ export default function HeroSection() {
              `
            }}
       />
+  {/* Brand jumbo experimental background layer */}
+  <div className="hero-jumbo-layer" aria-hidden />
       
       {/* Additional flame-like effects */}
       <div className="absolute inset-0 opacity-20">
@@ -55,8 +56,8 @@ export default function HeroSection() {
         </div>
       </div>
       
-      {/* Content Container */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-12 gap-8 items-center min-h-screen">
+  {/* Content Container */}
+  <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-12 gap-8 items-center min-h-screen">
         
         {/* Left Side - Text Content */}
         <div className="lg:col-span-7 space-y-8 lg:pr-8">
@@ -136,17 +137,6 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-cyber-cyan/10 group-hover:bg-cyber-cyan transition-all duration-500 rounded-lg" />
               <div className="absolute -inset-1 bg-gradient-to-r from-cyber-cyan/50 to-electric-blue/50 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
             </Button>
-          </div>
-        </div>
-        
-        {/* Right Side - 3D Crystal */}
-        <div className="lg:col-span-5 flex items-center justify-center lg:justify-end -mr-8 lg:-mr-16">
-          <div className="w-[500px] h-[600px] lg:w-[700px] lg:h-[700px]">
-            <CrystalScene 
-              scale={1.8}
-              glitchIntensity={0.2}
-              interactive={false}
-            />
           </div>
         </div>
       </div>
