@@ -54,35 +54,78 @@ export default function ServicesSection() {
            }}
       />
       
-      {/* Glassmorphism company banner */}
+      {/* Enhanced Glassmorphism company banner */}
       <div className="relative w-full overflow-hidden z-10">
-        <div className="backdrop-blur-md bg-white/5 border-y border-white/10 py-6">
+        {/* Background with subtle pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="h-full w-full bg-gradient-to-r from-steel-pink/10 via-transparent to-finn-purple/10" />
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)`,
+            backgroundSize: '20px 20px'
+          }} />
+        </div>
+        
+        {/* Main banner content */}
+        <div className="relative backdrop-blur-lg bg-gradient-to-r from-white/8 via-white/12 to-white/8 border-y border-white/20 py-8 shadow-2xl">
+          {/* Top accent line */}
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-steel-pink/50 to-transparent" />
+          
           {/* Scrolling companies container */}
           <div className="flex animate-scroll whitespace-nowrap">
             {/* First set of companies */}
             {companies.map((company, index) => (
               <div
                 key={`first-${index}`}
-                className="inline-flex items-center justify-center mx-8 text-ghost-white/70 font-semibold text-lg tracking-wide hover:text-steel-pink transition-colors duration-300"
+                className="group inline-flex items-center justify-center mx-10 py-2 px-4 rounded-lg transition-all duration-500 hover:bg-white/10 hover:backdrop-blur-xl"
               >
-                {company}
+                <span className="text-ghost-white/80 font-bold text-xl tracking-wider group-hover:text-steel-pink group-hover:scale-110 transition-all duration-300 drop-shadow-lg">
+                  {company}
+                </span>
+                {/* Subtle glow effect on hover */}
+                <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-steel-pink/20 to-finn-purple/20 blur-xl -z-10" />
               </div>
             ))}
             {/* Duplicate set for seamless loop */}
             {companies.map((company, index) => (
               <div
                 key={`second-${index}`}
-                className="inline-flex items-center justify-center mx-8 text-ghost-white/70 font-semibold text-lg tracking-wide hover:text-steel-pink transition-colors duration-300"
+                className="group inline-flex items-center justify-center mx-10 py-2 px-4 rounded-lg transition-all duration-500 hover:bg-white/10 hover:backdrop-blur-xl"
               >
-                {company}
+                <span className="text-ghost-white/80 font-bold text-xl tracking-wider group-hover:text-steel-pink group-hover:scale-110 transition-all duration-300 drop-shadow-lg">
+                  {company}
+                </span>
+                {/* Subtle glow effect on hover */}
+                <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-steel-pink/20 to-finn-purple/20 blur-xl -z-10" />
               </div>
             ))}
           </div>
+          
+          {/* Bottom accent line */}
+          <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-finn-purple/50 to-transparent" />
+          
+          {/* Side shimmer effects */}
+          <div className="absolute top-0 left-0 h-full w-1 bg-gradient-to-b from-transparent via-steel-pink/60 to-transparent animate-pulse" />
+          <div className="absolute top-0 right-0 h-full w-1 bg-gradient-to-b from-transparent via-finn-purple/60 to-transparent animate-pulse" />
         </div>
         
-        {/* Fade edges for smooth infinite scroll effect */}
-        <div className="absolute top-0 left-0 h-full w-20 bg-gradient-to-r from-raisin-black to-transparent pointer-events-none" />
-        <div className="absolute top-0 right-0 h-full w-20 bg-gradient-to-l from-raisin-black to-transparent pointer-events-none" />
+        {/* Enhanced fade edges with brand colors */}
+        <div className="absolute top-0 left-0 h-full w-32 bg-gradient-to-r from-raisin-black via-raisin-black/80 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 h-full w-32 bg-gradient-to-l from-raisin-black via-raisin-black/80 to-transparent pointer-events-none z-10" />
+        
+        {/* Floating particles effect */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-steel-pink/30 rounded-full animate-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${3 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
       </div>
       
       {/* Services content area - placeholder for now */}
@@ -100,12 +143,14 @@ export default function ServicesSection() {
               from evolving cyber threats through cutting-edge technology and expert analysis.
             </p>
           </div>
+        </div>
           
-          {/* Stacking Cards */}
-          <div className="mt-16">
-            <StackingCards />
-          </div>
-          
+        {/* Stacking Cards - Full Width */}
+        <div className="mt-16">
+          <StackingCards />
+        </div>
+        
+        <div className="max-w-7xl mx-auto">
           {/* Explore More Services Button */}
           <div className="mt-16 text-center">
             <Button variant="secondary" size="lg" className="border-2 border-finn-purple/60 hover:border-finn-purple hover:shadow-lg hover:shadow-finn-purple/25 transform hover:scale-105">

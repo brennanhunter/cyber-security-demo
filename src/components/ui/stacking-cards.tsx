@@ -45,14 +45,14 @@ const cards: StackingCard[] = [
 ]
 
 export default function StackingCards() {
-  const cardHeight = '40vh' // Equivalent to 40vw but using viewport height
-  const cardMargin = '4rem' // 4vw equivalent
-  const cardTopOffset = '1rem'
+  const cardHeight = '55vh' // Increased from 40vh for taller cards
+  const cardMargin = '2rem' // Reduced from 4rem for closer spacing
+  const cardTopOffset = '0.5rem' // Reduced from 1rem for closer spacing
   const numCards = cards.length
 
   return (
     <div 
-      className="w-4/5 mx-auto grid grid-cols-1 gap-16"
+      className="w-4/5 mx-auto grid grid-cols-1 gap-8" // Reduced gap from 16 to 8 for closer spacing
       style={{
         gridTemplateRows: `repeat(${numCards}, ${cardHeight})`,
         paddingBottom: `calc(${numCards} * ${cardTopOffset})`,
@@ -62,14 +62,26 @@ export default function StackingCards() {
       {cards.map((card) => (
         <div
           key={card.id}
-          className="sticky will-change-transform"
+          className="sticky will-change-transform relative"
           style={{
             top: '110px',
             paddingTop: cardTopOffset,
             transformOrigin: '50% 0%'
           }}
         >
-          <div className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${card.colorTheme} backdrop-blur-sm border transition-all duration-500 hover:transform hover:scale-105 h-full shadow-2xl`}>
+          {/* Blue glow on left side */}
+          <div className="absolute -left-6 -top-4 w-12 h-[calc(100%+2rem)] bg-electric-blue/40 rounded-full blur-md opacity-60 z-0"></div>
+          
+          {/* Purple glow on right side */}
+          <div className="absolute -right-6 -top-4 w-12 h-[calc(100%+2rem)] bg-steel-pink/40 rounded-full blur-md opacity-60 z-0"></div>
+          
+          {/* Top horizontal glow - blue to pink gradient */}
+          <div className="absolute -top-6 left-0 w-full h-12 bg-gradient-to-r from-electric-blue/30 via-finn-purple/40 to-steel-pink/30 rounded-full blur-md opacity-60 z-0"></div>
+          
+          {/* Bottom horizontal glow - blue to pink gradient */}
+          <div className="absolute -bottom-6 left-0 w-full h-12 bg-gradient-to-r from-electric-blue/30 via-finn-purple/40 to-steel-pink/30 rounded-full blur-md opacity-60 z-0"></div>
+          
+          <div className={`group relative overflow-hidden rounded-2xl bg-raisin-black border transition-all duration-500 hover:transform hover:scale-105 h-full shadow-2xl z-10`}>
             <div className="flex h-full">
               {!card.imageRight ? (
                 <>
@@ -81,15 +93,15 @@ export default function StackingCards() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-raisin-black/60" />
                   </div>
-                  <div className="w-3/5 p-8 flex flex-col justify-center">
-                    <h3 className={`text-3xl font-bold text-ghost-white mb-4 ${card.hoverColor} transition-colors duration-300`}>
+                  <div className="w-3/5 p-12 flex flex-col justify-center">
+                    <h3 className={`text-4xl lg:text-5xl font-bold text-ghost-white mb-6 ${card.hoverColor} transition-colors duration-300 leading-tight`}>
                       {card.title}
                     </h3>
-                    <p className="body-text mb-6 text-lg">
+                    <p className="body-text mb-8 text-xl lg:text-2xl leading-relaxed">
                       {card.description}
                     </p>
                     <div className="mt-auto">
-                      <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105">
+                      <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-lg px-8 py-4">
                         Know More
                       </Button>
                     </div>
@@ -97,15 +109,15 @@ export default function StackingCards() {
                 </>
               ) : (
                 <>
-                  <div className="w-3/5 p-8 flex flex-col justify-center">
-                    <h3 className={`text-3xl font-bold text-ghost-white mb-4 ${card.hoverColor} transition-colors duration-300`}>
+                  <div className="w-3/5 p-12 flex flex-col justify-center">
+                    <h3 className={`text-4xl lg:text-5xl font-bold text-ghost-white mb-6 ${card.hoverColor} transition-colors duration-300 leading-tight`}>
                       {card.title}
                     </h3>
-                    <p className="body-text mb-6 text-lg">
+                    <p className="body-text mb-8 text-xl lg:text-2xl leading-relaxed">
                       {card.description}
                     </p>
                     <div className="mt-auto">
-                      <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105">
+                      <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-lg px-8 py-4">
                         Know More
                       </Button>
                     </div>

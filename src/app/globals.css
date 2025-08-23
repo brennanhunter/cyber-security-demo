@@ -6,26 +6,26 @@
   --foreground: #ededed;
   
   /* SCP Custom Color Palette */
-  --steel-pink: #D108CE;
+  --steel-pink: #8c1f69;
   --finn-purple: #511F64;
-  --raisin-black: #212227;
+  --raisin-black: #191d30;
   
   /* Extended palette for gradients and effects */
   --deep-purple: #2D1B69;
-  --cyber-cyan: #00F5FF;
-  --electric-blue: #7DF9FF;
+  --cyber-cyan: #2b8fab;
+  --electric-blue: #1935c0;
   --neon-pink: #FF073A;
   --ghost-white: #F8F8FF;
 }
 
 @theme {
   /* SCP Custom Colors for Tailwind utilities */
-  --color-steel-pink: #D108CE;
+  --color-steel-pink: #8c1f69;
   --color-finn-purple: #511F64;
-  --color-raisin-black: #212227;
+  --color-raisin-black: #191d30;
   --color-deep-purple: #2D1B69;
-  --color-cyber-cyan: #00F5FF;
-  --color-electric-blue: #7DF9FF;
+  --color-cyber-cyan: #2b8fab;
+  --color-electric-blue: #1935c0;
   --color-neon-pink: #FF073A;
   --color-ghost-white: #F8F8FF;
   
@@ -134,7 +134,7 @@ body {
 
 /* Infinite scrolling animation */
 .animate-scroll {
-  animation: scroll 30s linear infinite;
+  animation: scroll 40s linear infinite;
 }
 
 @keyframes scroll {
@@ -143,6 +143,35 @@ body {
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+/* Enhanced animations for company banner */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.8;
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Add support for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll {
+    animation-duration: 80s;
+  }
+  .animate-float {
+    animation: none;
   }
 }
 
@@ -417,7 +446,8 @@ body {
 
 .glitch::before {
   color: #D108CE;
-  animation: glitchTop 3.5s infinite;
+  animation: glitchTop 2.3s infinite;
+  animation-delay: calc(var(--random, 0) * 0.5s);
   clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
   will-change: transform;
@@ -425,7 +455,8 @@ body {
 
 .glitch::after {
   color: #D108CE;
-  animation: glitchBottom 4s infinite;
+  animation: glitchBottom 3.1s infinite;
+  animation-delay: calc(var(--random, 0) * 0.7s);
   clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
   -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
   will-change: transform;
@@ -518,20 +549,29 @@ body {
 }
 
 @keyframes glitchTop {
-  0%, 85% {
+  0%, 82% {
     transform: translate(0, 0);
   }
+  83% {
+    transform: translate(0.08em, -0.03em);
+  }
+  84% {
+    transform: translate(-0.12em, 0.07em) skew(-3deg);
+  }
+  85% {
+    transform: translate(0.2em, -0.01em);
+  }
   86% {
-    transform: translate(0.1em, -0.05em);
+    transform: translate(-0.03em, 0.08em) skew(5deg);
   }
   87% {
-    transform: translate(-0.05em, 0.03em);
+    transform: translate(0.15em, -0.04em);
   }
   88% {
-    transform: translate(0.15em, -0.02em) skew(-8deg);
+    transform: translate(-0.09em, 0.02em) skew(-7deg);
   }
   89% {
-    transform: translate(-0.08em, 0.04em);
+    transform: translate(0.06em, -0.06em);
   }
   90%, 100% {
     transform: translate(0, 0);
@@ -539,22 +579,43 @@ body {
 }  
 
 @keyframes glitchBottom {
-  0%, 87% {
+  0%, 79% {
     transform: translate(0, 0);
   }
+  80% {
+    transform: translate(-0.05em, 0.03em);
+  }
+  81% {
+    transform: translate(0.1em, -0.08em) skew(4deg);
+  }
+  82% {
+    transform: translate(-0.15em, 0.05em);
+  }
+  83% {
+    transform: translate(0.08em, -0.02em) skew(-6deg);
+  }
+  84% {
+    transform: translate(-0.03em, 0.09em);
+  }
+  85% {
+    transform: translate(0.18em, -0.03em) skew(8deg);
+  }
+  86% {
+    transform: translate(-0.07em, 0.04em);
+  }
+  87% {
+    transform: translate(0.05em, -0.07em) skew(-4deg);
+  }
   88% {
-    transform: translate(-0.08em, 0.05em);
+    transform: translate(-0.11em, 0.06em);
   }
   89% {
-    transform: translate(0.06em, -0.03em);
+    transform: translate(0.13em, -0.01em) skew(3deg);
   }
   90% {
-    transform: translate(-0.12em, 0.08em) skew(12deg);
+    transform: translate(-0.04em, 0.08em);
   }
-  91% {
-    transform: translate(0.04em, -0.02em);
-  }
-  92%, 100% {
+  91%, 100% {
     transform: translate(0, 0);
   }
 }

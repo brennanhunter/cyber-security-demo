@@ -57,85 +57,35 @@ export default function HeroSection() {
       </div>
       
   {/* Content Container */}
-  <div className="relative z-20 w-full max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-12 gap-8 items-center min-h-screen">
+  <div className="relative z-20 w-full max-w-6xl mx-auto px-4 lg:px-8 flex flex-col items-center justify-start pt-20 min-h-screen text-center">
         
-        {/* Left Side - Text Content */}
-        <div className="lg:col-span-7 space-y-8 lg:pr-8">
-          {/* Label */}
-          <div className="label-text">
-            Cybersecurity Solutions
-          </div>
+        {/* Main Content */}
+        <div className="space-y-8">
           
           {/* Main Heading */}
-          <h1 className="heading-hero font-mono">
-            <span className="glitch" data-text="S.C.P">S.C.P</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
+            World-Leading Cybersecurity.
           </h1>
           
           {/* Subheading */}
-          <h2 className="text-4xl lg:text-5xl font-semibold leading-tight">
-            <span className="glitch-gradient text-gradient-cyber" data-text="Secure. Control. Protect.">Secure. Control. Protect.</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight text-gray-400">
+            Powered By <span className="glitch text-steel-pink" data-text="AI.">AI.</span>
           </h2>
           
           {/* Description */}
-          <p className="body-large max-w-xl">
-            Elite cybersecurity specialists providing comprehensive penetration testing, 
-            red team operations, and security training to fortify your digital infrastructure 
-            against evolving threats.
+          <p className="body-large max-w-4xl mx-auto leading-relaxed text-gray-300 pt-4">
+            Standing as the Ultimate Defenders of the Global Digital Ecosystem, Protecting Connections, 
+            Empowering Innovations, and Securing a Resilient Future for Generations to Come
           </p>
           
-          {/* Key Features */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-6">
-            <div className="text-center sm:text-left">
-              <div className="text-2xl font-bold text-steel-pink font-mono">24/7</div>
-              <div className="body-small">Threat Monitoring</div>
-            </div>
-            <div className="text-center sm:text-left">
-              <div className="text-2xl font-bold text-cyber-cyan font-mono">99.9%</div>
-              <div className="body-small">Security Rating</div>
-            </div>
-            <div className="text-center sm:text-left">
-              <div className="text-2xl font-bold text-electric-blue font-mono">SOC 2</div>
-              <div className="body-small">Compliance</div>
-            </div>
-          </div>
-          
-          {/* CTA Buttons with Glow Effects */}
-          <div className="flex flex-col sm:flex-row gap-6">
-            <Button 
-              variant="primary" 
-              size="lg" 
-              className="relative overflow-hidden bg-gradient-to-r from-steel-pink to-finn-purple hover:from-steel-pink/90 hover:to-finn-purple/90 shadow-2xl hover:shadow-steel-pink/50 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 border border-steel-pink/30 pulse-glow group"
-              onMouseEnter={() => primaryBtnRef.current?.startScramble()}
-            >
-              <span className="relative z-10 font-semibold tracking-wide">
-                <ScrambleText 
-                  ref={primaryBtnRef}
-                  speed={30}
-                  scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*(){}[]"
-                >
-                  Schedule Security Assessment
-                </ScrambleText>
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-steel-pink/20 to-finn-purple/20 animate-pulse" />
-            </Button>
-            
+          {/* CTA Button */}
+          <div className="pt-8">
             <Button 
               variant="ghost" 
               size="lg" 
-              className="relative group border-2 border-cyber-cyan/60 text-cyber-cyan hover:text-raisin-black hover:bg-cyber-cyan shadow-lg hover:shadow-cyber-cyan/50 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 backdrop-blur-sm bg-raisin-black/20"
-              onMouseEnter={() => secondaryBtnRef.current?.startScramble()}
+              className="px-8 py-4 border-2 border-steel-pink text-steel-pink hover:bg-steel-pink/10 font-semibold transition-all duration-300 hover:scale-105"
             >
-              <span className="relative z-10 font-semibold tracking-wide">
-                <ScrambleText 
-                  ref={secondaryBtnRef}
-                  speed={40}
-                  scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*(){}[]"
-                >
-                  View Case Studies
-                </ScrambleText>
-              </span>
-              <div className="absolute inset-0 bg-cyber-cyan/10 group-hover:bg-cyber-cyan transition-all duration-500 rounded-lg" />
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyber-cyan/50 to-electric-blue/50 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+              Get Started
             </Button>
           </div>
         </div>
