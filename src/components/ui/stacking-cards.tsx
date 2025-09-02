@@ -1,12 +1,15 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import GSAPSplitChars from '@/components/animations/gsap-split-chars'
+import Skull from '@/components/3d/Skull'
 
 interface StackingCard {
   id: string
   title: string
   description: string
-  image: string
+  image?: string
+  component?: 'skull'
   variant: 'ghost' | 'secondary' | 'cyber'
   colorTheme: string
   hoverColor: string
@@ -18,7 +21,7 @@ const cards: StackingCard[] = [
     id: 'penetration-testing',
     title: 'Ultimate Penetration Testing',
     description: 'The best possible security is hardened with the most comprehensive security testing available— simulated attacks performed by the industry\'s best white hat hackers.',
-    image: '/images/Lock.jpg',
+    component: 'skull',
     variant: 'ghost',
     colorTheme: 'from-steel-pink/10 to-finn-purple/20 border-steel-pink/30 hover:border-steel-pink/60',
     hoverColor: 'group-hover:text-steel-pink'
@@ -52,7 +55,7 @@ export default function StackingCards() {
 
   return (
     <div 
-      className="w-4/5 mx-auto grid grid-cols-1 gap-8" // Reduced gap from 16 to 8 for closer spacing
+      className="w-4/5 mx-auto grid grid-cols-1 gap-8 lg:gap-8" // Responsive gap
       style={{
         gridTemplateRows: `repeat(${numCards}, ${cardHeight})`,
         paddingBottom: `calc(${numCards} * ${cardTopOffset})`,
@@ -82,26 +85,84 @@ export default function StackingCards() {
           <div className="absolute -bottom-6 left-0 w-full h-12 bg-gradient-to-r from-electric-blue/30 via-finn-purple/40 to-steel-pink/30 rounded-full blur-md opacity-60 z-0"></div>
           
           <div className={`group relative overflow-hidden rounded-2xl bg-raisin-black border transition-all duration-500 hover:transform hover:scale-105 h-full shadow-2xl z-10`}>
-            <div className="flex h-full">
-              {!card.imageRight ? (
-                <>
-                  <div className="relative w-2/5 overflow-hidden">
+            {/* Mobile Layout - Vertical Stack */}
+            <div className="flex h-full md:hidden flex-col">
+              <div className="relative h-1/3 overflow-hidden bg-raisin-black">
+                {card.component === 'skull' ? (
+                  <>
+                    <div className="w-full h-full flex items-center justify-center transition-transform duration-700 group-hover:scale-110">
+                      <Skull />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-raisin-black/60" />
+                  </>
+                ) : (
+                  <>
                     <img 
                       src={card.image} 
                       alt={card.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-raisin-black/60" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-raisin-black/60" />
+                  </>
+                )}
+              </div>
+              <div className="h-2/3 p-6 flex flex-col justify-center">
+                <GSAPSplitChars 
+                  className={`text-2xl font-bold text-ghost-white mb-4 ${card.hoverColor} transition-colors duration-300 leading-tight`}
+                  delay={0.1}
+                  duration={0.6}
+                  stagger={0.03}
+                >
+                  {card.title}
+                </GSAPSplitChars>
+                <p className="body-text mb-6 text-base leading-relaxed">
+                  {card.description}
+                </p>
+                <div className="mt-auto">
+                  <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-sm px-6 py-3 w-full">
+                    Know More
+                  </Button>
+                </div>
+              </div>
+            </div>
+            
+            {/* Desktop Layout - Horizontal */}
+            <div className="hidden md:flex h-full">
+              {!card.imageRight ? (
+                <>
+                  <div className="relative w-2/5 overflow-hidden bg-raisin-black">
+                    {card.component === 'skull' ? (
+                      <>
+                        <div className="w-full h-full flex items-center justify-center transition-transform duration-700 group-hover:scale-110">
+                          <Skull />
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-raisin-black/60" />
+                      </>
+                    ) : (
+                      <>
+                        <img 
+                          src={card.image} 
+                          alt={card.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-raisin-black/60" />
+                      </>
+                    )}
                   </div>
-                  <div className="w-3/5 p-12 flex flex-col justify-center">
-                    <h3 className={`text-4xl lg:text-5xl font-bold text-ghost-white mb-6 ${card.hoverColor} transition-colors duration-300 leading-tight`}>
+                  <div className="w-3/5 p-8 lg:p-12 flex flex-col justify-center">
+                    <GSAPSplitChars 
+                      className={`text-3xl lg:text-4xl xl:text-5xl font-bold text-ghost-white mb-4 lg:mb-6 ${card.hoverColor} transition-colors duration-300 leading-tight`}
+                      delay={0.1}
+                      duration={0.6}
+                      stagger={0.03}
+                    >
                       {card.title}
-                    </h3>
-                    <p className="body-text mb-8 text-xl lg:text-2xl leading-relaxed">
+                    </GSAPSplitChars>
+                    <p className="body-text mb-6 lg:mb-8 text-lg lg:text-xl xl:text-2xl leading-relaxed">
                       {card.description}
                     </p>
                     <div className="mt-auto">
-                      <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-lg px-8 py-4">
+                      <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-base lg:text-lg px-6 lg:px-8 py-3 lg:py-4">
                         Know More
                       </Button>
                     </div>
@@ -109,26 +170,42 @@ export default function StackingCards() {
                 </>
               ) : (
                 <>
-                  <div className="w-3/5 p-12 flex flex-col justify-center">
-                    <h3 className={`text-4xl lg:text-5xl font-bold text-ghost-white mb-6 ${card.hoverColor} transition-colors duration-300 leading-tight`}>
+                  <div className="w-3/5 p-8 lg:p-12 flex flex-col justify-center">
+                    <GSAPSplitChars 
+                      className={`text-3xl lg:text-4xl xl:text-5xl font-bold text-ghost-white mb-4 lg:mb-6 ${card.hoverColor} transition-colors duration-300 leading-tight`}
+                      delay={0.1}
+                      duration={0.6}
+                      stagger={0.03}
+                    >
                       {card.title}
-                    </h3>
-                    <p className="body-text mb-8 text-xl lg:text-2xl leading-relaxed">
+                    </GSAPSplitChars>
+                    <p className="body-text mb-6 lg:mb-8 text-lg lg:text-xl xl:text-2xl leading-relaxed">
                       {card.description}
                     </p>
                     <div className="mt-auto">
-                      <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-lg px-8 py-4">
+                      <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-base lg:text-lg px-6 lg:px-8 py-3 lg:py-4">
                         Know More
                       </Button>
                     </div>
                   </div>
-                  <div className="relative w-2/5 overflow-hidden">
-                    <img 
-                      src={card.image} 
-                      alt={card.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-raisin-black/60" />
+                  <div className="relative w-2/5 overflow-hidden bg-raisin-black">
+                    {card.component === 'skull' ? (
+                      <>
+                        <div className="w-full h-full flex items-center justify-center transition-transform duration-700 group-hover:scale-110">
+                          <Skull />
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-raisin-black/60" />
+                      </>
+                    ) : (
+                      <>
+                        <img 
+                          src={card.image} 
+                          alt={card.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-raisin-black/60" />
+                      </>
+                    )}
                   </div>
                 </>
               )}

@@ -76,18 +76,17 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-[9999] bg-raisin-black/70 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20">
+    <header className="sticky top-0 left-0 right-0 z-[9999] bg-transparent backdrop-blur-md border-b border-white/5 shadow-lg shadow-black/10 mix-blend-screen">
       <nav className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 mr-16">
             <Link href="/" className="flex items-center">
-              <div className="glitch text-2xl font-bold tracking-wider">
-                S.C.P
-              </div>
-              <div className="ml-3 text-xs text-gray-400 font-mono hidden sm:block">
-                Secure Contain Protect
-              </div>
+              <img 
+                src="/images/logo-transparent.png" 
+                alt="S.C.P Logo" 
+                className="h-12 w-auto"
+              />
             </Link>
           </div>
 

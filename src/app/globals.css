@@ -1,5 +1,42 @@
 @import "tailwindcss";
 
+/* Custom Font Declaration */
+@font-face {
+  font-family: 'Alliance No.2';
+  src: url('/data/AllianceNo.2-Light.otf') format('opentype'),
+       url('/data/AllianceNo.2-Light.otf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alliance No.2';
+  src: url('/data/AllianceNo.2-Light.otf') format('opentype'),
+       url('/data/AllianceNo.2-Light.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alliance No.2';
+  src: url('/data/AllianceNo.2-Light.otf') format('opentype'),
+       url('/data/AllianceNo.2-Light.otf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Eau Sans Font Declaration */
+@font-face {
+  font-family: 'Eau Sans';
+  src: url('/data/eau_sans_black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Default theme (dark) */
   --background: #0a0a0a;
@@ -362,6 +399,14 @@ body {
 }
 
 /* Typography Utility Classes for SCP Cybersecurity */
+.font-alliance {
+  font-family: 'Alliance No.2', 'Inter', system-ui, -apple-system, sans-serif !important;
+}
+
+.font-eau-sans {
+  font-family: 'Eau Sans', 'Inter', system-ui, -apple-system, sans-serif !important;
+}
+
 .heading-hero {
   font-size: var(--font-size-6xl);
   font-weight: 700;
@@ -462,12 +507,53 @@ body {
   will-change: transform;
 }
 
+/* Cyan Glitch Effect Utility */
+.glitch-cyan {    
+  cursor: pointer;
+  position: relative;
+  color: #2b8fab;
+  z-index: 550;
+  display: inline-block;
+}
+
+.glitch-cyan::before,
+.glitch-cyan::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.glitch-cyan::before {
+  color: #ff073a;
+  animation: glitchTop 1.8s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+  will-change: transform;
+}
+
+.glitch-cyan::after {
+  color: #1935c0;
+  animation: glitchBottom 2.1s infinite;
+  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+  will-change: transform;
+}
+
 /* Glitch Effect for Gradient Text */
 .glitch-gradient {    
   cursor: pointer;
   position: relative;
   z-index: 550;
   display: inline-block;
+  animation: glitchMainText 4s infinite;
 }
 
 .glitch-gradient::before,
@@ -483,21 +569,25 @@ body {
   font-weight: inherit;
   line-height: inherit;
   letter-spacing: inherit;
-  background: linear-gradient(135deg, var(--cyber-cyan) 0%, var(--electric-blue) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .glitch-gradient::before {
-  animation: glitchTop 2s infinite;
+  background: linear-gradient(135deg, #ff073a 0%, #2b8fab 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glitchTop 1.5s infinite;
   clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
   will-change: transform;
 }
 
 .glitch-gradient::after {
-  animation: glitchBottom 2.2s infinite;
+  background: linear-gradient(135deg, #1935c0 0%, #ff073a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glitchBottom 1.8s infinite;
   clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
   -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
   will-change: transform;
@@ -546,6 +636,33 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-jumbo-layer::after { animation: none; }
+}
+
+@keyframes glitchMainText {
+  0%, 90% {
+    color: transparent;
+    background: linear-gradient(135deg, var(--cyber-cyan) 0%, var(--electric-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  91%, 92% {
+    color: #ff073a;
+    background: none;
+    -webkit-text-fill-color: #ff073a;
+  }
+  93%, 94% {
+    color: #1935c0;
+    background: none;
+    -webkit-text-fill-color: #1935c0;
+  }
+  95%, 100% {
+    color: transparent;
+    background: linear-gradient(135deg, var(--cyber-cyan) 0%, var(--electric-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 @keyframes glitchTop {

@@ -2,13 +2,83 @@
 
 import StackingCards from '@/components/ui/stacking-cards'
 import { Button } from '@/components/ui/button'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
+import GSAPSplitText from '@/components/animations/gsap-split-text'
 
 export default function ServicesSection() {
-  // Sample company names - you can replace with actual client logos later
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isClient, setIsClient] = useState(false)
+  const [particles, setParticles] = useState<Array<{
+    id: number
+    left: string
+    animationDelay: string
+    animationDuration: string
+  }>>([])
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  })
+
+  // Initialize particles only on client
+  useEffect(() => {
+    setIsClient(true)
+    const newParticles = Array.from({ length: 6 }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 3}s`,
+      animationDuration: `${3 + Math.random() * 2}s`
+    }))
+    setParticles(newParticles)
+  }, [])
+
+  // Transform scroll progress to line visibility with staggered timing
+  const line1Opacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]) // Delayed start for "Enterprise"
+  const line1Y = useTransform(scrollYProgress, [0.1, 0.3], [200, 0]) // Starts much further down, "rises from ground"
+  
+  const line2Opacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]) // More delayed for "Cybersecurity"
+  const line2Y = useTransform(scrollYProgress, [0.2, 0.4], [50, 0])
+  
+  const line3Opacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]) // Even more delayed for "Services"
+  const line3Y = useTransform(scrollYProgress, [0.3, 0.5], [50, 0])
+
+
+
+  // Unstick animation - when description gets close (around 80-90% scroll), heading unsticks
+
+  const headingLines = ['Enterprise', 'Cybersecurity', 'Services']
+  const lineAnimations = [
+    { opacity: line1Opacity, y: line1Y },
+    { opacity: line2Opacity, y: line2Y },
+    { opacity: line3Opacity, y: line3Y }
+  ]
+  // Company data with logos and names
   const companies = [
-    'Microsoft', 'Amazon', 'Google', 'Meta', 'Apple', 'Tesla', 'Netflix', 'Spotify',
-    'Adobe', 'Salesforce', 'Oracle', 'IBM', 'Intel', 'NVIDIA', 'PayPal', 'Uber',
-    'Airbnb', 'Twitter', 'LinkedIn', 'GitHub', 'Slack', 'Zoom', 'DocuSign', 'Shopify'
+    { name: 'Microsoft', hasLogo: false },
+    { name: 'Amazon', hasLogo: false },
+    { name: 'Google', hasLogo: false },
+    { name: 'Meta', hasLogo: false },
+    { name: 'Apple', hasLogo: false },
+    { name: 'Tesla', hasLogo: true, logo: '/logos/tesla-logo.svg' },
+    { name: 'Netflix', hasLogo: false },
+    { name: 'Spotify', hasLogo: false },
+    { name: 'Adobe', hasLogo: false },
+    { name: 'Salesforce', hasLogo: false },
+    { name: 'Oracle', hasLogo: false },
+    { name: 'IBM', hasLogo: false },
+    { name: 'Intel', hasLogo: false },
+    { name: 'NVIDIA', hasLogo: false },
+    { name: 'PayPal', hasLogo: false },
+    { name: 'Uber', hasLogo: false },
+    { name: 'Airbnb', hasLogo: false },
+    { name: 'Twitter', hasLogo: false },
+    { name: 'LinkedIn', hasLogo: false },
+    { name: 'GitHub', hasLogo: false },
+    { name: 'Slack', hasLogo: false },
+    { name: 'Zoom', hasLogo: false },
+    { name: 'DocuSign', hasLogo: false },
+    { name: 'Shopify', hasLogo: false }
   ]
 
   return (
@@ -78,9 +148,17 @@ export default function ServicesSection() {
                 key={`first-${index}`}
                 className="group inline-flex items-center justify-center mx-10 py-2 px-4 rounded-lg transition-all duration-500 hover:bg-white/10 hover:backdrop-blur-xl"
               >
-                <span className="text-ghost-white/80 font-bold text-xl tracking-wider group-hover:text-steel-pink group-hover:scale-110 transition-all duration-300 drop-shadow-lg">
-                  {company}
-                </span>
+                {company.hasLogo ? (
+                  <img 
+                    src={company.logo} 
+                    alt={company.name}
+                    className="h-8 w-auto group-hover:scale-110 transition-all duration-300 brightness-0 invert group-hover:brightness-100 group-hover:invert-0"
+                  />
+                ) : (
+                  <span className="text-ghost-white/80 font-bold text-xl tracking-wider group-hover:text-steel-pink group-hover:scale-110 transition-all duration-300 drop-shadow-lg">
+                    {company.name}
+                  </span>
+                )}
                 {/* Subtle glow effect on hover */}
                 <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-steel-pink/20 to-finn-purple/20 blur-xl -z-10" />
               </div>
@@ -91,9 +169,17 @@ export default function ServicesSection() {
                 key={`second-${index}`}
                 className="group inline-flex items-center justify-center mx-10 py-2 px-4 rounded-lg transition-all duration-500 hover:bg-white/10 hover:backdrop-blur-xl"
               >
-                <span className="text-ghost-white/80 font-bold text-xl tracking-wider group-hover:text-steel-pink group-hover:scale-110 transition-all duration-300 drop-shadow-lg">
-                  {company}
-                </span>
+                {company.hasLogo ? (
+                  <img 
+                    src={company.logo} 
+                    alt={company.name}
+                    className="h-8 w-auto group-hover:scale-110 transition-all duration-300 brightness-0 invert group-hover:brightness-100 group-hover:invert-0"
+                  />
+                ) : (
+                  <span className="text-ghost-white/80 font-bold text-xl tracking-wider group-hover:text-steel-pink group-hover:scale-110 transition-all duration-300 drop-shadow-lg">
+                    {company.name}
+                  </span>
+                )}
                 {/* Subtle glow effect on hover */}
                 <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-steel-pink/20 to-finn-purple/20 blur-xl -z-10" />
               </div>
@@ -112,47 +198,83 @@ export default function ServicesSection() {
         <div className="absolute top-0 left-0 h-full w-32 bg-gradient-to-r from-raisin-black via-raisin-black/80 to-transparent pointer-events-none z-10" />
         <div className="absolute top-0 right-0 h-full w-32 bg-gradient-to-l from-raisin-black via-raisin-black/80 to-transparent pointer-events-none z-10" />
         
-        {/* Floating particles effect */}
+        {/* Floating particles effect - only render on client to avoid hydration mismatch */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(6)].map((_, i) => (
+          {isClient && particles.map((particle) => (
             <div
-              key={i}
+              key={particle.id}
               className="absolute w-1 h-1 bg-steel-pink/30 rounded-full animate-float"
               style={{
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${3 + Math.random() * 2}s`
+                left: particle.left,
+                animationDelay: particle.animationDelay,
+                animationDuration: particle.animationDuration
               }}
             />
           ))}
         </div>
       </div>
       
-      {/* Services content area - placeholder for now */}
-      <div className="relative z-10 px-4 lg:px-8 py-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center space-y-6">
-            <div className="label-text">
-              Trusted by Industry Leaders
+      {/* Services content area */}
+      <div ref={containerRef} className="relative z-10">
+        {/* Sticky container for heading only */}
+        <div className="px-4 lg:px-8 py-24">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center space-y-6">
+              <div className="label-text">
+                Trusted by Industry Leaders
+              </div>
+              
+              {/* Main Heading - simple sticky */}
+              <div className="sticky top-5 z-10">
+                <div className="text-6xl md:text-8xl lg:text-9xl font-bold text-center leading-tight font-alliance py-8">
+                  {headingLines.map((line, index) => (
+                    <motion.div
+                      key={index}
+                      style={{
+                        opacity: lineAnimations[index].opacity,
+                        y: lineAnimations[index].y
+                      }}
+                      className="my-4"
+                    >
+                      {line}
+                    </motion.div>
+                  ))}
+                </div>
+                
+                {/* Decorative line */}
+                <div className="flex justify-center">
+                  <div className="w-1/3 h-1 bg-finn-purple"></div>
+                </div>
+              </div>
+              
+              {/* Spacer to create scroll content */}
+              <div className="h-[100vh]"></div>
             </div>
-            <h2 className="heading-section">
-              Enterprise Cybersecurity Services
-            </h2>
-            <p className="body-large text-center max-w-3xl mx-auto">
-              Our comprehensive security solutions protect the world&apos;s most innovative companies 
-              from evolving cyber threats through cutting-edge technology and expert analysis.
-            </p>
+          </div>
+        </div>
+        
+        {/* Description text - outside sticky container, this will cause unstick */}
+        <div className="px-4 lg:px-8 py-4 pb-24 md:pb-48">
+          <div className="text-center">
+            <GSAPSplitText 
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center w-[95%] md:w-[88%] mx-auto leading-relaxed font-eau-sans"
+              delay={0.2}
+              duration={0.8}
+              stagger={0.015}
+            >
+              Our comprehensive security solutions protect the world&apos;s most innovative companies from evolving cyber threats through cutting-edge technology and expert analysis.
+            </GSAPSplitText>
           </div>
         </div>
           
-        {/* Stacking Cards - Full Width */}
-        <div className="mt-16">
+        {/* Stacking Cards */}
+        <div className="px-4 lg:px-8">
           <StackingCards />
         </div>
         
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
           {/* Explore More Services Button */}
-          <div className="mt-16 text-center">
+          <div className="mt-16 mb-32 text-center relative z-40">
             <Button variant="secondary" size="lg" className="border-2 border-finn-purple/60 hover:border-finn-purple hover:shadow-lg hover:shadow-finn-purple/25 transform hover:scale-105">
               Explore More Services
             </Button>
@@ -160,8 +282,8 @@ export default function ServicesSection() {
         </div>
       </div>
       
-      {/* Bottom gradient transition to raisin black */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent to-raisin-black z-10" />
+      {/* Bottom gradient transition to raisin black - positioned to not overlap button */}
+      <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-b from-transparent to-raisin-black z-5" />
     </section>
   )
 }

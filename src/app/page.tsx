@@ -37,7 +37,7 @@ export default function Home() {
           </div>
 
           {/* Main Heading with Glitch Effect */}
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight font-alliance">
             <span className="glitch block mb-2" data-text="World-Leading Cybersecurity">
               World-Leading Cybersecurity
             </span>
