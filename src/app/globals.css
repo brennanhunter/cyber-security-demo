@@ -593,6 +593,14 @@ body {
   will-change: transform;
 }
 
+/* ================= Grid Pattern for 404 Page ================= */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(209, 8, 206, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(209, 8, 206, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
 /* ================= Hero Brand Jumbo Experimental Background ================= */
 /* Layer producing soft blurred striped + color sweep using brand palette */
 .hero-jumbo-layer {
