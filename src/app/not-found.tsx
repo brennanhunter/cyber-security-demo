@@ -130,7 +130,11 @@ export default function NotFound() {
   const [currentPageName, setCurrentPageName] = useState('')
   const [accessTime, setAccessTime] = useState('')
   const [sessionId, setSessionId] = useState('')
-  const [randomContent, setRandomContent] = useState<any>(null)
+  const [randomContent, setRandomContent] = useState<{
+    type: string
+    length: number
+    data: string
+  } | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -291,7 +295,7 @@ export default function NotFound() {
             </h2>
 
             <p className="text-xl mb-12 text-gray-400 leading-relaxed max-w-3xl mx-auto">
-              You've accessed a <span className="text-steel-pink font-semibold">classified section</span> of our security perimeter. 
+              You&apos;ve accessed a <span className="text-steel-pink font-semibold">classified section</span> of our security perimeter. 
               This hidden endpoint has been <span className="text-cyber-cyan font-semibold">successfully logged</span> and 
               your access patterns are being <span className="text-electric-blue font-semibold">monitored</span> for analysis.
             </p>

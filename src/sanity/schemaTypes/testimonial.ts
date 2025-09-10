@@ -1,4 +1,5 @@
 import { defineType } from 'sanity'
+import { Rule } from 'sanity'
 
 export default defineType({
   name: 'testimonial',
@@ -9,13 +10,13 @@ export default defineType({
       name: 'name',
       title: 'Client Name',
       type: 'string',
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: Rule) => Rule.required()
     },
     {
       name: 'company',
       title: 'Company',
       type: 'string',
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: Rule) => Rule.required()
     },
     {
       name: 'position',
@@ -27,13 +28,13 @@ export default defineType({
       title: 'Testimonial Quote',
       type: 'text',
       rows: 4,
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: Rule) => Rule.required()
     },
     {
       name: 'rating',
       title: 'Rating',
       type: 'number',
-      validation: (Rule: any) => Rule.min(1).max(5).integer(),
+      validation: (Rule: Rule) => Rule.min(1).max(5).integer(),
       options: {
         list: [
           { title: '⭐ 1 Star', value: 1 },

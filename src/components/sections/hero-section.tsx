@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import ScrambleText, { ScrambleTextHandle } from '@/components/animations/scramble-text'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import Image from 'next/image'
 
 export default function HeroSection() {
   const primaryBtnRef = useRef<ScrambleTextHandle>(null)
@@ -113,14 +114,17 @@ export default function HeroSection() {
           rotate: sunRotation
         }}
       >
-        <img 
+        <Image 
           src="/images/SunImage.png" 
           alt="Sun" 
+          width={1800}
+          height={1800}
           className="w-[180vw] h-[180vw]"
           style={{ 
             maxWidth: 'none',
             maxHeight: 'none'
           }}
+          priority
         />
       </motion.div>
       
@@ -132,14 +136,17 @@ export default function HeroSection() {
           rotate: sunRotation
         }}
       >
-        <img 
+        <Image 
           src="/images/SunImage.png" 
           alt="Sun" 
+          width={1000}
+          height={1000}
           className="w-[100vw] h-[100vw]"
           style={{ 
             maxWidth: 'none',
             maxHeight: 'none'
           }}
+          priority
         />
       </motion.div>
     </section>

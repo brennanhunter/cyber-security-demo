@@ -1,4 +1,5 @@
 import { defineType } from 'sanity'
+import { Rule } from 'sanity'
 
 export default defineType({
   name: 'animatedText',
@@ -9,7 +10,7 @@ export default defineType({
       name: 'text',
       title: 'Text Content',
       type: 'string',
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: Rule) => Rule.required()
     },
     {
       name: 'animation',
@@ -31,14 +32,14 @@ export default defineType({
       title: 'Animation Delay (ms)',
       type: 'number',
       initialValue: 0,
-      validation: (Rule: any) => Rule.min(0).max(5000)
+      validation: (Rule: Rule) => Rule.min(0).max(5000)
     },
     {
       name: 'duration',
       title: 'Duration (ms)',
       type: 'number',
       initialValue: 1000,
-      validation: (Rule: any) => Rule.min(100).max(10000)
+      validation: (Rule: Rule) => Rule.min(100).max(10000)
     },
     {
       name: 'trigger',

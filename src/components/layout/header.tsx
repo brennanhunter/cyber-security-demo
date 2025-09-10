@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronDown, Menu, X } from 'lucide-react';
 
 const navigation = [
@@ -82,9 +83,11 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-shrink-0 mr-16">
             <Link href="/" className="flex items-center">
-              <img 
+              <Image 
                 src="/images/logo-transparent.png" 
                 alt="S.C.P Logo" 
+                width={48}
+                height={48}
                 className="h-12 w-auto"
               />
             </Link>

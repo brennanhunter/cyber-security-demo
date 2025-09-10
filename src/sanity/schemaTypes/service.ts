@@ -1,4 +1,5 @@
 import { defineType } from 'sanity'
+import { Rule } from 'sanity'
 
 export default defineType({
   name: 'service',
@@ -9,7 +10,7 @@ export default defineType({
       name: 'title',
       title: 'Service Name',
       type: 'string',
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: Rule) => Rule.required()
     },
     {
       name: 'slug',
@@ -19,7 +20,7 @@ export default defineType({
         source: 'title',
         maxLength: 96
       },
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: Rule) => Rule.required()
     },
     {
       name: 'shortDescription',

@@ -1,4 +1,5 @@
 import { defineType } from 'sanity'
+import { Rule } from 'sanity'
 
 export default defineType({
   name: 'seo',
@@ -10,7 +11,7 @@ export default defineType({
       title: 'SEO Title',
       type: 'string',
       description: 'Title that appears in search results and browser tabs',
-      validation: (Rule: any) => Rule.max(60).warning('Titles over 60 characters may be truncated in search results')
+      validation: (Rule: Rule) => Rule.max(60).warning('Titles over 60 characters may be truncated in search results')
     },
     {
       name: 'description',
@@ -18,7 +19,7 @@ export default defineType({
       type: 'text',
       rows: 3,
       description: 'Brief description for search results',
-      validation: (Rule: any) => Rule.max(160).warning('Descriptions over 160 characters may be truncated')
+      validation: (Rule: Rule) => Rule.max(160).warning('Descriptions over 160 characters may be truncated')
     },
     {
       name: 'keywords',

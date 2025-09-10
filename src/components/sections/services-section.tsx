@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import GSAPSplitText from '@/components/animations/gsap-split-text'
+import Image from 'next/image'
 
 export default function ServicesSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -148,10 +149,12 @@ export default function ServicesSection() {
                 key={`first-${index}`}
                 className="group inline-flex items-center justify-center mx-10 py-2 px-4 rounded-lg transition-all duration-500 hover:bg-white/10 hover:backdrop-blur-xl"
               >
-                {company.hasLogo ? (
-                  <img 
+                {company.hasLogo && company.logo ? (
+                  <Image 
                     src={company.logo} 
                     alt={company.name}
+                    width={32}
+                    height={32}
                     className="h-8 w-auto group-hover:scale-110 transition-all duration-300 brightness-0 invert group-hover:brightness-100 group-hover:invert-0"
                   />
                 ) : (
@@ -169,10 +172,12 @@ export default function ServicesSection() {
                 key={`second-${index}`}
                 className="group inline-flex items-center justify-center mx-10 py-2 px-4 rounded-lg transition-all duration-500 hover:bg-white/10 hover:backdrop-blur-xl"
               >
-                {company.hasLogo ? (
-                  <img 
+                {company.hasLogo && company.logo ? (
+                  <Image 
                     src={company.logo} 
                     alt={company.name}
+                    width={32}
+                    height={32}
                     className="h-8 w-auto group-hover:scale-110 transition-all duration-300 brightness-0 invert group-hover:brightness-100 group-hover:invert-0"
                   />
                 ) : (

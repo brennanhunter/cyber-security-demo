@@ -4,16 +4,18 @@ import { PortableText } from '@portabletext/react'
 import { urlFor } from '@/lib/sanity'
 import PageWrapper from '@/components/layout/page-wrapper'
 import { Metadata } from 'next'
+import Image from 'next/image'
 
 interface ServicePageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-  const service = await getService(params.slug)
+  const { slug } = await params
+  const service = await getService(slug)
   
   if (!service) {
     return {
@@ -36,13 +38,14 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 export async function generateStaticParams() {
   const services = await getAllServices()
   
-  return services.map((service: any) => ({
+  return services.map((service: { slug: { current: string } }) => ({
     slug: service.slug.current,
   }))
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
-  const service = await getService(params.slug)
+  const { slug } = await params
+  const service = await getService(slug)
 
   if (!service) {
     notFound()
@@ -54,10 +57,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <section className="relative min-h-screen flex items-center justify-center bg-raisin-black">
         {service.heroSection?.backgroundImage && (
           <div className="absolute inset-0 z-0">
-            <img 
+            <Image 
               src={urlFor(service.heroSection.backgroundImage).url()} 
               alt=""
-              className="w-full h-full object-cover opacity-20"
+              fill
+              className="object-cover opacity-20"
             />
           </div>
         )}
@@ -93,7 +97,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {service.features.map((feature: any, index: number) => (
+              {service.features.map((feature: { title: string; description?: string }, index: number) => (
                 <div key={index} className="bg-raisin-black/50 border border-steel-pink/20 rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-3 text-steel-pink">
                     {feature.title}
