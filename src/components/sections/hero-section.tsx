@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import ScrambleText, { ScrambleTextHandle } from '@/components/animations/scramble-text'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
+import HeroBG from '@/components/animations/HeroBG'
 
 export default function HeroSection() {
   const primaryBtnRef = useRef<ScrambleTextHandle>(null)
@@ -20,53 +21,26 @@ export default function HeroSection() {
   const sunRotation = useTransform(scrollYProgress, [0, 1], [0, 90])
   
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-between bg-raisin-black overflow-hidden">
-      {/* Fire-like gradient background */}
-      <div className="absolute inset-0 bg-gradient-radial from-steel-pink/40 via-finn-purple/30 to-transparent" 
-           style={{
-             background: `
-               radial-gradient(ellipse 80% 60% at 50% 100%, 
-                 #D108CE40 0%, 
-                 #511F6460 25%, 
-                 #2D1B6930 50%, 
-                 transparent 70%
-               ),
-               radial-gradient(ellipse 60% 40% at 20% 80%, 
-                 #D108CE30 0%, 
-                 #511F6440 40%, 
-                 transparent 70%
-               ),
-               radial-gradient(ellipse 60% 40% at 80% 80%, 
-                 #511F6440 0%, 
-                 #D108CE30 40%, 
-                 transparent 70%
-               ),
-               linear-gradient(to bottom, 
-                 #212227 0%, 
-                 #21222700 50%,
-                 transparent 100%
-               )
-             `
-           }}
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-between bg-raisin-black overflow-hidden cursor-none">
+      {/* Interactive Shader Background */}
+      <div className="absolute inset-0">
+        <HeroBG />
+      </div>
+      
+      {/* Solid raisin-black layer with transparent center */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse 65% 65% at center center, 
+            transparent 0%, 
+            transparent 60%, 
+            #191d30 100%
+          )`
+        }}
       />
-  {/* Brand jumbo experimental background layer */}
-  <div className="hero-jumbo-layer" aria-hidden />
       
-      {/* Additional flame-like effects */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-gradient-radial from-steel-pink/60 via-finn-purple/40 to-transparent rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 left-1/4 w-64 h-64 bg-gradient-radial from-finn-purple/50 via-steel-pink/30 to-transparent rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-gradient-radial from-steel-pink/50 via-finn-purple/30 to-transparent rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
-      </div>
-      
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="grid grid-cols-12 gap-4 h-full">
-          {Array.from({ length: 48 }, (_, i) => (
-            <div key={i} className="border-r border-steel-pink/20 h-full" />
-          ))}
-        </div>
-      </div>
+      {/* Subtle overlay to ensure text readability */}
+      <div className="absolute inset-0 bg-raisin-black/20" />
       
   {/* Content Container */}
   <div className="relative z-20 w-full max-w-6xl mx-auto px-4 lg:px-8 flex flex-col items-center justify-start pt-20 min-h-screen text-center">
