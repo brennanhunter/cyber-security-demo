@@ -4,8 +4,8 @@ import { vertexShader, fluidShader, displayShader } from "./shaders";
 
 // 🔧 Config
 const config = {
-  brushSize: 67.5,      // Reduced by 25% (90 * 0.75)
-  brushStrength: 2.2,   // Increased strength for more visible effect
+  brushSize: 40.0,      // Much smaller area
+  brushStrength: 1.2,   // Much weaker pull
   distortionAmount: 0.0, // Not used in new system
   fluidDecay: 0.94,     // Not used in position-based system
   trailLength: 0.8,

@@ -25,36 +25,56 @@ export const fluidShader = `
     vec2 U = vUv * iResolution;
     
     if (iFrame < 1) {
-      // Initialize
+      // Initialize with original positions
       gl_FragColor = vec4(U, 0.0, 1.0);
     } else {
-      // Sample the previous frame to get the last position
+      // Sample previous frame to get current stretched positions
       vec4 prev = texture2D(iPreviousFrame, vUv);
-      vec2 currentPos = prev.xy;
+      vec2 stretchedPos = prev.xy;
       
-      // Apply drag effect if mouse is active
+      // Apply viscous restoration toward original position
+      vec2 restoreForce = (U - stretchedPos) * 0.015; // Slow restoration like thick slime
+      stretchedPos += restoreForce;
+      
+      // Mouse interaction - create stretchy, viscous pulling
       if (iMouse.z > 0.0) {
         vec2 mousePos = iMouse.xy;
-        float distToMouse = distance(currentPos, mousePos);
+        vec2 mousePrev = iMouse.zw;
+        vec2 mouseVel = mousePos - mousePrev;
+        
+        float distToMouse = distance(stretchedPos, mousePos);
         float brushRadius = uBrushSize;
         
         if (distToMouse < brushRadius) {
           float influence = 1.0 - (distToMouse / brushRadius);
           influence = smoothstep(0.0, 1.0, influence);
-          influence = pow(influence, 0.6);
           
-          // Pull the current position toward the mouse
-          vec2 pullDirection = mousePos - currentPos;
-          float pullStrength = influence * uBrushStrength * 0.12; // Increased from 0.08
-          currentPos += pullDirection * pullStrength;
+          // Strong direct pull toward mouse
+          vec2 pullDirection = mousePos - stretchedPos;
+          float pullStrength = influence * uBrushStrength * 0.08; // Much smaller pull
+          stretchedPos += pullDirection * pullStrength;
+          
+          // Add velocity-based stretching for trailing effect
+          float velMagnitude = length(mouseVel);
+          if (velMagnitude > 1.0) {
+            vec2 stretchDirection = normalize(mouseVel);
+            float stretchAmount = influence * velMagnitude * 0.2; // Much smaller stretch
+            stretchedPos += stretchDirection * stretchAmount;
+          }
+        }
+        
+        // Secondary influence zone for more trailing effect
+        float secondaryRadius = brushRadius * 1.5; // Smaller secondary zone
+        if (distToMouse < secondaryRadius && distToMouse > brushRadius) {
+          float secondaryInfluence = 1.0 - ((distToMouse - brushRadius) / brushRadius);
+          secondaryInfluence = smoothstep(0.0, 1.0, secondaryInfluence) * 0.15; // Weaker influence
+          
+          vec2 pullDirection = mousePos - stretchedPos;
+          stretchedPos += pullDirection * secondaryInfluence * uBrushStrength * 0.05; // Much smaller pull
         }
       }
       
-      // Natural restoration back to original position
-      vec2 restoreForce = (U - currentPos) * 0.02;
-      currentPos += restoreForce;
-      
-      gl_FragColor = vec4(currentPos, 0.0, 1.0);
+      gl_FragColor = vec4(stretchedPos, 0.0, 1.0);
     }
   }
 `;
