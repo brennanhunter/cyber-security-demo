@@ -1529,6 +1529,15 @@ function initFramebuffers(
 const WebGL: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+  // Touch gesture detection refs
+  const touchStartData = useRef<{ x: number; y: number; time: number; id: number } | null>(null);
+  const touchMoveData = useRef<{ totalDistance: number; horizontalDistance: number; verticalDistance: number }>({
+    totalDistance: 0,
+    horizontalDistance: 0,
+    verticalDistance: 0
+  });
+  const isFluidInteractionRef = useRef(false);
 
   useEffect(() => {
     if (!containerRef.current || !canvasRef.current) return;
@@ -1681,8 +1690,63 @@ const WebGL: React.FC = () => {
       updatePointerUpData(pointers[0]);
     };
 
+    // Smart touch detection - determines if touch is for fluid interaction or scrolling
+    const shouldPreventDefault = (currentTouch: { x: number; y: number }, startTouch: { x: number; y: number }, timeElapsed: number) => {
+      const deltaX = Math.abs(currentTouch.x - startTouch.x);
+      const deltaY = Math.abs(currentTouch.y - startTouch.y);
+      const totalDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      
+      // Update move data for tracking
+      touchMoveData.current.totalDistance = totalDistance;
+      touchMoveData.current.horizontalDistance = deltaX;
+      touchMoveData.current.verticalDistance = deltaY;
+      
+      // Thresholds for detecting interaction intent
+      const MOVEMENT_THRESHOLD = 15; // pixels - minimum movement to determine intent
+      const HORIZONTAL_BIAS_THRESHOLD = 0.7; // ratio - how much horizontal vs vertical movement
+      const TIME_THRESHOLD = 150; // ms - quick movements are more likely scrolling
+      
+      // If very little movement, allow default behavior (potential scroll start)
+      if (totalDistance < MOVEMENT_THRESHOLD) {
+        return false;
+      }
+      
+      // If movement is very quick and primarily vertical, it's likely scrolling
+      if (timeElapsed < TIME_THRESHOLD && deltaY > deltaX * 1.5) {
+        return false;
+      }
+      
+      // If movement has significant horizontal component or is circular/chaotic, it's likely fluid interaction
+      if (deltaX > deltaY * HORIZONTAL_BIAS_THRESHOLD || totalDistance > MOVEMENT_THRESHOLD * 2) {
+        return true;
+      }
+      
+      // Default: allow scrolling for primarily vertical movements
+      return deltaX > deltaY;
+    };
+
     const handleTouchStart = (e: TouchEvent) => {
-      e.preventDefault();
+      const touch = e.touches[0];
+      if (touch) {
+        // Store initial touch data
+        touchStartData.current = {
+          x: touch.pageX,
+          y: touch.pageY,
+          time: Date.now(),
+          id: touch.identifier
+        };
+        
+        // Reset interaction state
+        isFluidInteractionRef.current = false;
+        touchMoveData.current = { totalDistance: 0, horizontalDistance: 0, verticalDistance: 0 };
+      }
+      
+      // Always prevent default for multi-touch (clearly fluid interaction)
+      if (e.touches.length > 1) {
+        e.preventDefault();
+        isFluidInteractionRef.current = true;
+      }
+      
       const touches = e.targetTouches;
       while (touches.length >= pointers.length)
         pointers.push(pointerPrototype());
@@ -1694,7 +1758,30 @@ const WebGL: React.FC = () => {
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
+      const touch = e.touches[0];
+      
+      // Check if we should prevent default based on gesture analysis
+      if (touch && touchStartData.current && touch.identifier === touchStartData.current.id) {
+        const currentTime = Date.now();
+        const timeElapsed = currentTime - touchStartData.current.time;
+        const currentTouch = { x: touch.pageX, y: touch.pageY };
+        const startTouch = { x: touchStartData.current.x, y: touchStartData.current.y };
+        
+        // Determine if this should be treated as fluid interaction
+        const shouldPrevent = shouldPreventDefault(currentTouch, startTouch, timeElapsed);
+        
+        if (shouldPrevent || isFluidInteractionRef.current) {
+          e.preventDefault();
+          isFluidInteractionRef.current = true;
+        }
+      }
+      
+      // Always prevent default for multi-touch
+      if (e.touches.length > 1) {
+        e.preventDefault();
+        isFluidInteractionRef.current = true;
+      }
+      
       const touches = e.targetTouches;
       for (let i = 0; i < touches.length; i++) {
         const pointer = pointers[i + 1];
@@ -1706,6 +1793,13 @@ const WebGL: React.FC = () => {
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
+      // Reset touch interaction state when all touches end
+      if (e.touches.length === 0) {
+        touchStartData.current = null;
+        isFluidInteractionRef.current = false;
+        touchMoveData.current = { totalDistance: 0, horizontalDistance: 0, verticalDistance: 0 };
+      }
+      
       const touches = e.changedTouches;
       for (let i = 0; i < touches.length; i++) {
         const pointer = pointers.find(p => p.id === touches[i].identifier);
