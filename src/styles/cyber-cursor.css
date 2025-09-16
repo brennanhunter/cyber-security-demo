@@ -1,0 +1,28 @@
+/* Cyber Cursor Styles */
+.cyber-cursor-section {
+  cursor: none;
+}
+
+.cyber-cursor-section * {
+  cursor: none !important;
+}
+
+/* Ensure the custom cursor works well with interactive elements */
+.cyber-cursor-section button:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* Add glowing effect on interactive elements */
+.cyber-cursor-section button:hover {
+  box-shadow: 0 0 20px rgba(234, 88, 151, 0.3);
+}
+
+/* Ensure proper z-index layering */
+.cyber-cursor {
+  z-index: 9999;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+}

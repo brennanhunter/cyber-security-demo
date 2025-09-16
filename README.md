@@ -6,8 +6,10 @@ A cutting-edge cybersecurity company website built with Next.js 15, Tailwind CSS
 
 ## 🎨 Features
 
+- **Interactive WebGL Fluid Simulation**: Advanced physics-based background animation
 - **Custom Color Palette**: Steel Pink, Finn Purple, Cyber Cyan theme
 - **Advanced Animations**: Glitch effects, pulse glow, loading animations
+- **Custom Cyber Cursor**: Multi-layered cursor with hover states
 - **Tailwind CSS v4**: Modern CSS-first configuration
 - **TypeScript**: Full type safety
 - **Responsive Design**: Mobile-first approach
@@ -106,6 +108,15 @@ Follow the detailed roadmap in `DEVLOG.md` for the next development phases:
 - [DEVLOG.md](./DEVLOG.md) - Detailed development roadmap
 - [Tailwind CSS v4 Docs](https://tailwindcss.com/docs/v4-beta)
 - [Next.js Documentation](https://nextjs.org/docs)
+
+## 🙏 Credits & Attribution
+
+### WebGL Fluid Simulation
+The interactive fluid simulation background is based on the excellent work by **Pavel Dobryakov**:
+- **Original Project**: [WebGL Fluid Simulation](https://github.com/PavelDoGreat/WebGL-Fluid-Simulation)
+- **Author**: Pavel Dobryakov
+- **License**: MIT License
+- **Modifications**: Ported to TypeScript React component with custom color theming
 
 ## 🎨 Design Inspiration
 

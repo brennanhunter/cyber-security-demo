@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button'
 import ScrambleText, { ScrambleTextHandle } from '@/components/animations/scramble-text'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
-import HeroBG from '@/components/animations/HeroBG'
+import WebGL from '../animations/WebGL'
+import CyberCursor from '@/components/ui/cyber-cursor'
 
 export default function HeroSection() {
   const primaryBtnRef = useRef<ScrambleTextHandle>(null)
@@ -22,14 +23,17 @@ export default function HeroSection() {
   
   return (
     <section ref={sectionRef} className="relative min-h-screen flex items-center justify-between bg-raisin-black overflow-hidden cursor-none">
+      {/* Custom Cyber Cursor */}
+      <CyberCursor />
+      
       {/* Interactive Shader Background */}
       <div className="absolute inset-0">
-        <HeroBG />
+        <WebGL />
       </div>
       
       {/* Solid raisin-black layer with transparent center */}
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background: `radial-gradient(ellipse 65% 65% at center center, 
             transparent 0%, 
@@ -40,10 +44,10 @@ export default function HeroSection() {
       />
       
       {/* Subtle overlay to ensure text readability */}
-      <div className="absolute inset-0 bg-raisin-black/20" />
+      <div className="absolute inset-0 bg-raisin-black/20 pointer-events-none" />
       
   {/* Content Container */}
-  <div className="relative z-20 w-full max-w-6xl mx-auto px-4 lg:px-8 flex flex-col items-center justify-start pt-20 min-h-screen text-center">
+  <div className="relative z-20 w-full max-w-6xl mx-auto px-4 lg:px-8 flex flex-col items-center justify-start pt-20 min-h-screen text-center pointer-events-none">
         
         {/* Main Content */}
         <div className="space-y-8">
@@ -65,7 +69,7 @@ export default function HeroSection() {
           </p>
           
           {/* CTA Button */}
-          <div className="pt-8">
+          <div className="pt-8 pointer-events-auto">
             <Button 
               variant="ghost" 
               size="lg" 
@@ -82,7 +86,7 @@ export default function HeroSection() {
       
       {/* Sun Image - Mobile */}
       <motion.div 
-        className="absolute left-1/2 transform -translate-x-1/2 z-10 md:hidden" 
+        className="absolute left-1/2 transform -translate-x-1/2 z-10 md:hidden pointer-events-none" 
         style={{ 
           bottom: '-70vh',
           rotate: sunRotation
@@ -104,7 +108,7 @@ export default function HeroSection() {
       
       {/* Sun Image - Desktop */}
       <motion.div 
-        className="absolute left-1/2 transform -translate-x-1/2 z-10 hidden md:block" 
+        className="absolute left-1/2 transform -translate-x-1/2 z-10 hidden md:block pointer-events-none" 
         style={{ 
           bottom: '-150vh',
           rotate: sunRotation
