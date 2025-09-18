@@ -6,6 +6,18 @@ const nextConfig: NextConfig = {
   // Generate a static not-found page at build time
   trailingSlash: false,
   
+  // Configure external image domains
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+        pathname: '/images/**',
+      },
+    ],
+  },
+  
   // Security headers
   async headers() {
     return [

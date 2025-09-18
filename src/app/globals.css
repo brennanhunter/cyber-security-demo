@@ -43,29 +43,39 @@
   --background: #0a0a0a;
   --foreground: #ededed;
   
-  /* SCP Custom Color Palette */
-  --steel-pink: #8c1f69;
-  --finn-purple: #511F64;
-  --raisin-black: #191d30;
+  /* Enhanced Electric SCP Color Palette */
+  --steel-pink: #ff2d92;           /* More electric pink */
+  --finn-purple: #8b5cf6;          /* Brighter purple */
+  --raisin-black: #0f0f23;        /* Deeper black with blue tint */
   
   /* Extended palette for gradients and effects */
-  --deep-purple: #2D1B69;
-  --cyber-cyan: #2b8fab;
-  --electric-blue: #1935c0;
-  --neon-pink: #FF073A;
-  --ghost-white: #F8F8FF;
+  --deep-purple: #6366f1;          /* Electric purple */
+  --cyber-cyan: #00d4ff;           /* Bright electric cyan */
+  --electric-blue: #3b82f6;        /* Vivid blue */
+  --neon-pink: #f472b6;            /* Bright neon pink */
+  --ghost-white: #f8fafc;          /* Clean white */
+  --charcoal-gray: #1e293b;        /* Sophisticated dark gray */
+  
+  /* New electric accent colors */
+  --electric-violet: #a855f7;      /* Vibrant violet */
+  --neon-blue: #06b6d4;            /* Electric blue accent */
+  --hot-pink: #ec4899;             /* Hot pink accent */
 }
 
 @theme {
-  /* SCP Custom Colors for Tailwind utilities */
-  --color-steel-pink: #8c1f69;
-  --color-finn-purple: #511F64;
-  --color-raisin-black: #191d30;
-  --color-deep-purple: #2D1B69;
-  --color-cyber-cyan: #2b8fab;
-  --color-electric-blue: #1935c0;
-  --color-neon-pink: #FF073A;
-  --color-ghost-white: #F8F8FF;
+  /* Enhanced Electric SCP Colors for Tailwind utilities */
+  --color-steel-pink: #ff2d92;
+  --color-finn-purple: #8b5cf6;
+  --color-raisin-black: #0f0f23;
+  --color-deep-purple: #6366f1;
+  --color-cyber-cyan: #00d4ff;
+  --color-electric-blue: #3b82f6;
+  --color-neon-pink: #f472b6;
+  --color-ghost-white: #f8fafc;
+  --color-charcoal-gray: #1e293b;
+  --color-electric-violet: #a855f7;
+  --color-neon-blue: #06b6d4;
+  --color-hot-pink: #ec4899;
   
   /* Font Families */
   --font-family-sans: var(--font-inter);
@@ -744,4 +754,31 @@ body {
   91%, 100% {
     transform: translate(0, 0);
   }
+}
+
+/* Triangle rotation animations */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 15s linear infinite;
 }

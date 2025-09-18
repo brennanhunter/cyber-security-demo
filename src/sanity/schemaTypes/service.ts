@@ -53,75 +53,215 @@ export default defineType({
       fields: [
         {
           name: 'headline',
-          title: 'Hero Headline',
+          title: 'Main Headline',
           type: 'string',
-          description: 'Main headline for the service page'
+          description: 'Main headline like "Attacking to Protect: Your Best Defense is Our Attack!"'
         },
         {
           name: 'subtitle',
-          title: 'Hero Subtitle',
+          title: 'Subtitle',
           type: 'text',
-          rows: 2
+          rows: 2,
+          description: 'Supporting text under the headline'
         },
         {
           name: 'backgroundImage',
           title: 'Background Image',
-          type: 'image'
-        },
-        {
-          name: 'videoBackground',
-          title: 'Background Video (Optional)',
-          type: 'file',
+          type: 'image',
           options: {
-            accept: 'video/*'
+            hotspot: true
           }
         },
         {
           name: 'ctaText',
           title: 'CTA Button Text',
           type: 'string',
-          initialValue: 'Get Started'
+          initialValue: 'Get in Touch'
         },
         {
           name: 'ctaLink',
           title: 'CTA Link',
           type: 'string',
           description: 'Contact form or external link'
+        },
+        {
+          name: 'brandLogo',
+          title: 'Brand Logo',
+          type: 'image',
+          description: 'Red Team logo or brand mark'
         }
       ]
     },
     {
-      name: 'features',
-      title: 'Key Features',
-      type: 'array',
-      of: [
+      name: 'focusSection',
+      title: 'Our Focus Section',
+      type: 'object',
+      description: 'The section with content on left and image on right',
+      fields: [
         {
-          type: 'object',
-          fields: [
-            { name: 'title', title: 'Feature Title', type: 'string' },
-            { name: 'description', title: 'Feature Description', type: 'text', rows: 2 },
-            { 
-              name: 'icon', 
-              title: 'Feature Icon', 
-              type: 'string',
-              options: {
-                list: [
-                  { title: '🛡️ Shield (Protection)', value: 'shield' },
-                  { title: '🔒 Lock (Security)', value: 'lock' },
-                  { title: '👁️ Eye (Monitoring)', value: 'eye' },
-                  { title: '⚡ Zap (Performance)', value: 'zap' },
-                  { title: '🔍 Search (Analysis)', value: 'search' },
-                  { title: '💻 Code (Development)', value: 'code' },
-                  { title: '🌐 Globe (Network)', value: 'globe' },
-                  { title: '🚨 Alert (Incident Response)', value: 'alert' },
-                  { title: '📊 Chart (Reporting)', value: 'chart' },
-                  { title: '⚙️ Gear (Configuration)', value: 'gear' },
-                  { title: '🔧 Tool (Management)', value: 'tool' },
-                  { title: '📱 Device (Endpoint)', value: 'device' },
-                  { title: '☁️ Cloud (Infrastructure)', value: 'cloud' },
-                  { title: '🔐 Key (Authentication)', value: 'key' },
-                  { title: '🎯 Target (Precision)', value: 'target' }
-                ]
+          name: 'sectionTitle',
+          title: 'Section Title',
+          type: 'string',
+          description: 'e.g., "Our focus"'
+        },
+        {
+          name: 'mainHeading',
+          title: 'Main Heading',
+          type: 'string',
+          description: 'e.g., "Simulations: Revealing vulnerabilities and fortifying your defenses."'
+        },
+        {
+          name: 'description',
+          title: 'Description',
+          type: 'text',
+          rows: 6,
+          description: 'The detailed explanation paragraph'
+        },
+        {
+          name: 'ctaText',
+          title: 'CTA Button Text',
+          type: 'string',
+          initialValue: 'Get in Touch'
+        },
+        {
+          name: 'ctaLink',
+          title: 'CTA Link',
+          type: 'string'
+        },
+        {
+          name: 'sideImage',
+          title: 'Side Image',
+          type: 'image',
+          options: {
+            hotspot: true
+          },
+          description: 'Image to display on the right side'
+        }
+      ]
+    },
+    {
+      name: 'servicesGrid',
+      title: 'Services Grid ("What we do")',
+      type: 'object',
+      fields: [
+        {
+          name: 'sectionTitle',
+          title: 'Section Title',
+          type: 'string',
+          initialValue: 'What we do'
+        },
+        {
+          name: 'services',
+          title: 'Service Cards',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                {
+                  name: 'icon',
+                  title: 'Service Icon',
+                  type: 'image',
+                  description: 'Red diamond icon or custom icon'
+                },
+                {
+                  name: 'title',
+                  title: 'Service Title',
+                  type: 'string',
+                  description: 'e.g., "Threat Alerts Validation"'
+                },
+                {
+                  name: 'description',
+                  title: 'Service Description',
+                  type: 'text',
+                  rows: 4
+                }
+              ],
+              preview: {
+                select: {
+                  title: 'title',
+                  subtitle: 'description'
+                }
+              }
+            }
+          ]
+        },
+        {
+          name: 'ctaText',
+          title: 'CTA Button Text',
+          type: 'string',
+          initialValue: 'Hire our services'
+        },
+        {
+          name: 'ctaLink',
+          title: 'CTA Link',
+          type: 'string'
+        }
+      ]
+    },
+    {
+      name: 'advantagesGrid',
+      title: 'Red Team Advantages Grid',
+      type: 'object',
+      fields: [
+        {
+          name: 'sectionTitle',
+          title: 'Section Title',
+          type: 'string',
+          initialValue: 'Red Team Advantages'
+        },
+        {
+          name: 'subtitle',
+          title: 'Section Subtitle',
+          type: 'text',
+          rows: 2,
+          description: 'e.g., "Invest in robust defenses, proactive vulnerability identification..."'
+        },
+        {
+          name: 'advantages',
+          title: 'Advantage Cards',
+          type: 'array',
+          validation: (Rule: Rule) => Rule.max(9),
+          of: [
+            {
+              type: 'object',
+              fields: [
+                {
+                  name: 'number',
+                  title: 'Card Number',
+                  type: 'number',
+                  validation: (Rule: Rule) => Rule.min(1).max(9)
+                },
+                {
+                  name: 'title',
+                  title: 'Advantage Title',
+                  type: 'string',
+                  description: 'e.g., "Proactive Resilience Assessment"'
+                },
+                {
+                  name: 'description',
+                  title: 'Advantage Description',
+                  type: 'text',
+                  rows: 3
+                },
+                {
+                  name: 'readMoreLink',
+                  title: 'Read More Link',
+                  type: 'string',
+                  description: 'Optional link for more details'
+                }
+              ],
+              preview: {
+                select: {
+                  title: 'title',
+                  subtitle: 'number'
+                },
+                prepare({ title, subtitle }) {
+                  return {
+                    title,
+                    subtitle: `#${subtitle}`
+                  }
+                }
               }
             }
           ]
@@ -129,14 +269,63 @@ export default defineType({
       ]
     },
     {
-      name: 'content',
-      title: 'Page Content',
-      type: 'array',
-      of: [
-        { type: 'block' },
-        { type: 'image' },
-        { type: 'animatedText' },
-        { type: 'videoSection' }
+      name: 'faqSection',
+      title: 'FAQ Section',
+      type: 'object',
+      fields: [
+        {
+          name: 'sectionTitle',
+          title: 'Section Title',
+          type: 'string',
+          initialValue: 'Frequently asked questions'
+        },
+        {
+          name: 'subtitle',
+          title: 'Section Subtitle',
+          type: 'text',
+          rows: 2,
+          description: 'Text under the title'
+        },
+        {
+          name: 'ctaText',
+          title: 'CTA Button Text',
+          type: 'string',
+          initialValue: 'Get in Touch'
+        },
+        {
+          name: 'ctaLink',
+          title: 'CTA Link',
+          type: 'string'
+        },
+        {
+          name: 'faqs',
+          title: 'FAQ Questions',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                {
+                  name: 'question',
+                  title: 'Question',
+                  type: 'string'
+                },
+                {
+                  name: 'answer',
+                  title: 'Answer',
+                  type: 'text',
+                  rows: 4
+                }
+              ],
+              preview: {
+                select: {
+                  title: 'question',
+                  subtitle: 'answer'
+                }
+              }
+            }
+          ]
+        }
       ]
     },
     {
