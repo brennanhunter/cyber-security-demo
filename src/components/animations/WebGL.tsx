@@ -1629,6 +1629,10 @@ const WebGL: React.FC = () => {
     // Initial splats
     multipleSplats(gl, Math.floor(Math.random() * 20) + 5, splatProgram, framebuffers.velocity, framebuffers.dye, blit, canvas);
 
+    // Auto-splat timing
+    let lastAutoSplat = Date.now();
+    const autoSplatInterval = 2000; // 2 seconds between auto splats
+    
     // Animation loop
     const animate = () => {
       const dt = calcDeltaTime();
@@ -1639,6 +1643,14 @@ const WebGL: React.FC = () => {
       
       updateColors(dt);
       applyInputs(gl, splatProgram, framebuffers.velocity, framebuffers.dye, blit, canvas);
+      
+      // Auto-splat generation (simulates clicking and dragging)
+      const now = Date.now();
+      if (now - lastAutoSplat > autoSplatInterval) {
+        // Add random splats to simulate activity
+        splatStack.push(Math.floor(Math.random() * 8) + 3); // 3-10 splats
+        lastAutoSplat = now;
+      }
       
       if (!config.PAUSED) {
         step(gl, dt, framebuffers.velocity, framebuffers.dye, framebuffers.divergence, framebuffers.curl, framebuffers.pressure, {
