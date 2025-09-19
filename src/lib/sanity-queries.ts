@@ -147,3 +147,35 @@ export async function getSimplePage(slug: string) {
     }
   `, { slug })
 }
+
+// Get services grouped by teams for navigation
+export async function getServicesForNavigation() {
+  return client.fetch(groq`
+    *[_type == "service" && defined(team)] | order(team asc, title asc){
+      title,
+      displayName,
+      slug,
+      team
+    }
+  `)
+}
+
+// Get team pages (for team landing pages)
+export async function getTeamServices(team: string) {
+  return client.fetch(groq`
+    *[_type == "service" && team == $team] | order(title asc){
+      title,
+      slug,
+      shortDescription,
+      icon,
+      heroSection{
+        headline,
+        subtitle
+      },
+      pricing{
+        startingPrice,
+        pricingModel
+      }
+    }
+  `, { team })
+}

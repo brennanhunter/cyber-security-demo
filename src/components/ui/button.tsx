@@ -31,6 +31,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           baseStyles,
           variants[variant],
           sizes[size],
+          variant === 'primary' && 'pulse-glow',
           isLoading && 'cursor-not-allowed',
           className
         )}

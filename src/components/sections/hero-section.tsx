@@ -73,7 +73,7 @@ export default function HeroSection() {
             <Button 
               variant="ghost" 
               size="lg" 
-              className="px-8 py-4 border-2 border-steel-pink text-steel-pink hover:bg-steel-pink/10 font-semibold transition-all duration-300 hover:scale-105"
+              className="px-8 py-4 border-2 border-steel-pink text-steel-pink hover:bg-steel-pink/10 font-semibold transition-all duration-300 hover:scale-105 pulse-glow"
               onMouseEnter={() => primaryBtnRef.current?.startScramble()}
             >
               <ScrambleText ref={primaryBtnRef}>

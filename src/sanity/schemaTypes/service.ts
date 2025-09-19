@@ -23,6 +23,29 @@ export default defineType({
       validation: (Rule: Rule) => Rule.required()
     },
     {
+      name: 'team',
+      title: 'Service Team',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Pentest Team', value: 'pentest-team' },
+          { title: 'AppSec Team', value: 'appsec-team' },
+          { title: 'Purple Team', value: 'purple-team' },
+          { title: 'Red Team', value: 'red-team' },
+          { title: 'Tiger Team', value: 'tiger-team' },
+          { title: 'BlackOps Team', value: 'blackops-team' }
+        ]
+      },
+      validation: (Rule: Rule) => Rule.required(),
+      description: 'Which team this service belongs to for navigation grouping'
+    },
+    {
+      name: 'displayName',
+      title: 'Display Name (for navigation)',
+      type: 'string',
+      description: 'Short name for navigation menus (e.g., "API Pen." instead of "API Penetration Testing")'
+    },
+    {
       name: 'shortDescription',
       title: 'Short Description',
       type: 'text',

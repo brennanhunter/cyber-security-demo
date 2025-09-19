@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { ScrambleButton } from '@/components/ui/scramble-button'
 import GSAPSplitChars from '@/components/animations/gsap-split-chars'
 import Skull from '@/components/3d/Skull'
 
@@ -119,9 +119,9 @@ export default function StackingCards() {
                   {card.description}
                 </p>
                 <div className="mt-auto">
-                  <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-sm px-6 py-3 w-full">
+                  <ScrambleButton variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-sm px-6 py-3 w-full">
                     Know More
-                  </Button>
+                  </ScrambleButton>
                 </div>
               </div>
             </div>
@@ -162,9 +162,9 @@ export default function StackingCards() {
                       {card.description}
                     </p>
                     <div className="mt-auto">
-                      <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-base lg:text-lg px-6 lg:px-8 py-3 lg:py-4">
+                      <ScrambleButton variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-base lg:text-lg px-6 lg:px-8 py-3 lg:py-4">
                         Know More
-                      </Button>
+                      </ScrambleButton>
                     </div>
                   </div>
                 </>
@@ -183,9 +183,9 @@ export default function StackingCards() {
                       {card.description}
                     </p>
                     <div className="mt-auto">
-                      <Button variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-base lg:text-lg px-6 lg:px-8 py-3 lg:py-4">
+                      <ScrambleButton variant={card.variant} size="lg" className="hover:shadow-lg transform hover:scale-105 text-base lg:text-lg px-6 lg:px-8 py-3 lg:py-4">
                         Know More
-                      </Button>
+                      </ScrambleButton>
                     </div>
                   </div>
                   <div className="relative w-2/5 overflow-hidden bg-raisin-black">

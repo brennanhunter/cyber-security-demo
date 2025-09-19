@@ -83,6 +83,10 @@ interface ServicePageContentProps {
 
 export default function ServicePageContent({ service }: ServicePageContentProps) {
   const scrambleRef = useRef<ScrambleTextHandle>(null)
+  const learnMoreRef = useRef<ScrambleTextHandle>(null)
+  const focusCtaRef = useRef<ScrambleTextHandle>(null)
+  const servicesCtaRef = useRef<ScrambleTextHandle>(null)
+  const faqCtaRef = useRef<ScrambleTextHandle>(null)
 
   const handleHeroButtonHover = () => {
     if (scrambleRef.current) {
@@ -165,8 +169,11 @@ export default function ServicePageContent({ service }: ServicePageContentProps)
             <a 
               href="#focus" 
               className="inline-flex items-center justify-center px-8 py-4 border border-cyber-cyan/30 text-cyber-cyan hover:bg-cyber-cyan/10 font-alliance font-medium transition-all duration-300"
+              onMouseEnter={() => learnMoreRef.current?.startScramble()}
             >
-              Learn More
+              <ScrambleText ref={learnMoreRef}>
+                Learn More
+              </ScrambleText>
             </a>
           </div>
         </div>
@@ -207,8 +214,11 @@ export default function ServicePageContent({ service }: ServicePageContentProps)
                   <a 
                     href={service.focusSection.ctaLink}
                     className="group inline-flex items-center bg-raisin-black hover:bg-gradient-to-r hover:from-steel-pink hover:to-electric-violet text-white font-alliance px-10 py-4 font-semibold transition-all duration-300 uppercase tracking-wider text-sm"
+                    onMouseEnter={() => focusCtaRef.current?.startScramble()}
                   >
-                    {service.focusSection.ctaText}
+                    <ScrambleText ref={focusCtaRef}>
+                      {service.focusSection.ctaText}
+                    </ScrambleText>
                     <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                   </a>
                 )}
@@ -306,8 +316,11 @@ export default function ServicePageContent({ service }: ServicePageContentProps)
                 <a 
                   href={service.servicesGrid.ctaLink}
                   className="inline-block bg-gradient-to-r from-steel-pink to-electric-violet hover:from-electric-violet hover:to-cyber-cyan text-white font-alliance px-12 py-4 font-semibold transition-all duration-300 uppercase tracking-wider transform hover:scale-105"
+                  onMouseEnter={() => servicesCtaRef.current?.startScramble()}
                 >
-                  {service.servicesGrid.ctaText}
+                  <ScrambleText ref={servicesCtaRef}>
+                    {service.servicesGrid.ctaText}
+                  </ScrambleText>
                 </a>
               </div>
             )}
@@ -395,8 +408,11 @@ export default function ServicePageContent({ service }: ServicePageContentProps)
                   <a 
                     href={service.faqSection.ctaLink}
                     className="inline-block bg-raisin-black hover:bg-steel-pink text-white font-alliance px-10 py-4 rounded-none font-semibold transition-all uppercase tracking-wider text-sm"
+                    onMouseEnter={() => faqCtaRef.current?.startScramble()}
                   >
-                    {service.faqSection.ctaText}
+                    <ScrambleText ref={faqCtaRef}>
+                      {service.faqSection.ctaText}
+                    </ScrambleText>
                   </a>
                 )}
               </div>
