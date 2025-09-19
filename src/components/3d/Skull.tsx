@@ -2,7 +2,7 @@
 import { Canvas } from '@react-three/fiber';
 import { AsciiRenderer} from '@react-three/drei';
 import { useGLTF } from '@react-three/drei';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Object3D } from 'three';
 
@@ -26,6 +26,20 @@ function SkullModel({ isHovered }: { isHovered: boolean }) {
 
 export default function Skull() {
   const [isHovered, setIsHovered] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Don't render the 3D scene on server side
+  if (!isMounted) {
+    return (
+      <div className="w-full h-full cursor-pointer relative overflow-hidden bg-black flex items-center justify-center">
+        <div className="text-steel-pink font-mono text-sm">Loading 3D Model...</div>
+      </div>
+    );
+  }
 
   return (
     <div 

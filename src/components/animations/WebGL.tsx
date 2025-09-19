@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-// Pavel's exact config - ported to TypeScript
+// Optimized fluid config for fast, light behavior
 const config = {
     SIM_RESOLUTION: 128,
-    DYE_RESOLUTION: 1024,
+    DYE_RESOLUTION: 512,
     CAPTURE_RESOLUTION: 512,
-    DENSITY_DISSIPATION: 1,
-    VELOCITY_DISSIPATION: 0.2,
+    DENSITY_DISSIPATION: 0.97,
+    VELOCITY_DISSIPATION: 0.98,
     PRESSURE: 0.8,
     PRESSURE_ITERATIONS: 20,
     CURL: 30,
@@ -1529,6 +1529,7 @@ function initFramebuffers(
 const WebGL: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
   
   // Touch gesture detection refs
   const touchStartData = useRef<{ x: number; y: number; time: number; id: number } | null>(null);
@@ -1540,7 +1541,13 @@ const WebGL: React.FC = () => {
   const isFluidInteractionRef = useRef(false);
 
   useEffect(() => {
-    if (!containerRef.current || !canvasRef.current) return;
+    // Set mounted flag to ensure client-side only rendering
+    setIsMounted(true)
+  }, []);
+
+  useEffect(() => {
+    // Only initialize WebGL after component is mounted and refs are available
+    if (!isMounted || !containerRef.current || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
 
@@ -1626,13 +1633,9 @@ const WebGL: React.FC = () => {
     // Initial resize
     resizeCanvas();
 
-    // Initial splats
+    // Initial splats for startup effect
     multipleSplats(gl, Math.floor(Math.random() * 20) + 5, splatProgram, framebuffers.velocity, framebuffers.dye, blit, canvas);
 
-    // Auto-splat timing
-    let lastAutoSplat = Date.now();
-    const autoSplatInterval = 2000; // 2 seconds between auto splats
-    
     // Animation loop
     const animate = () => {
       const dt = calcDeltaTime();
@@ -1643,14 +1646,6 @@ const WebGL: React.FC = () => {
       
       updateColors(dt);
       applyInputs(gl, splatProgram, framebuffers.velocity, framebuffers.dye, blit, canvas);
-      
-      // Auto-splat generation (simulates clicking and dragging)
-      const now = Date.now();
-      if (now - lastAutoSplat > autoSplatInterval) {
-        // Add random splats to simulate activity
-        splatStack.push(Math.floor(Math.random() * 8) + 3); // 3-10 splats
-        lastAutoSplat = now;
-      }
       
       if (!config.PAUSED) {
         step(gl, dt, framebuffers.velocity, framebuffers.dye, framebuffers.divergence, framebuffers.curl, framebuffers.pressure, {
@@ -1685,21 +1680,26 @@ const WebGL: React.FC = () => {
       const posX = scaleByPixelRatio(e.offsetX);
       const posY = scaleByPixelRatio(e.offsetY);
       let pointer = pointers.find(p => p.id === -1);
-      if (pointer == null)
+      if (pointer == null) {
         pointer = pointerPrototype();
+        pointers.push(pointer);
+      }
       updatePointerDownData(pointer, -1, posX, posY, canvas);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      const pointer = pointers[0];
-      if (!pointer.down) return;
+      const pointer = pointers.find(p => p.id === -1);
+      if (!pointer || !pointer.down) return;
       const posX = scaleByPixelRatio(e.offsetX);
       const posY = scaleByPixelRatio(e.offsetY);
       updatePointerMoveData(pointer, posX, posY, canvas);
     };
 
     const handleMouseUp = () => {
-      updatePointerUpData(pointers[0]);
+      const pointer = pointers.find(p => p.id === -1);
+      if (pointer) {
+        updatePointerUpData(pointer);
+      }
     };
 
     // Smart touch detection - determines if touch is for fluid interaction or scrolling
@@ -1847,7 +1847,17 @@ const WebGL: React.FC = () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
 
-  }, []);
+  }, [isMounted]);
+
+  // Don't render anything until mounted on client side
+  if (!isMounted) {
+    return (
+      <div 
+        className="fixed inset-0 w-full h-full"
+        style={{ background: 'black' }}
+      />
+    );
+  }
 
   return (
     <div 
