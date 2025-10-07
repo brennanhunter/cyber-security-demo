@@ -36,11 +36,15 @@ interface RegularNav {
 // Interface for service data from Sanity
 interface SanityService {
   title: string
-  displayName?: string
   slug: {
     current: string
   }
-  team: string
+  category?: {
+    title: string
+    slug: {
+      current: string
+    }
+  }
 }
 
 // Static navigation sections that don't change
@@ -120,24 +124,25 @@ export function useNavigation() {
         // Fetch services from Sanity
         const services = await getServicesForNavigation()
         
-        // Group services by team
-        const servicesByTeam = services.reduce((acc: Record<string, ServiceNav[]>, service: SanityService) => {
-          if (!acc[service.team]) {
-            acc[service.team] = []
+        // Group services by category
+        const servicesByCategory = services.reduce((acc: Record<string, ServiceNav[]>, service: SanityService) => {
+          const categoryTitle = service.category?.title || 'Other Services'
+          if (!acc[categoryTitle]) {
+            acc[categoryTitle] = []
           }
-          acc[service.team].push({
-            name: service.displayName || service.title,
-            href: `/services/${service.slug.current}`
+          acc[categoryTitle].push({
+            name: service.title,
+            href: `/${service.slug.current}`
           })
           return acc
         }, {})
 
-        // Build team navigation with submenus
-        const teams: TeamNav[] = Object.entries(teamConfig).map(([teamKey, teamInfo]) => ({
-          name: teamInfo.name,
-          href: teamInfo.href,
+        // Build category navigation with submenus
+        const categories: TeamNav[] = Object.entries(servicesByCategory).map(([categoryTitle, categoryServices]) => ({
+          name: categoryTitle,
+          href: `/${categoryTitle.toLowerCase().replace(/\s+/g, '-')}`,
           hasSubmenu: true as const,
-          submenuItems: servicesByTeam[teamKey] || []
+          submenuItems: categoryServices as ServiceNav[]
         }))
 
         // Build services dropdown
@@ -145,7 +150,7 @@ export function useNavigation() {
           name: 'Services',
           href: '/services',
           hasDropdown: true,
-          items: teams
+          items: categories
         }
 
         // Combine all navigation
@@ -161,7 +166,6 @@ export function useNavigation() {
         setNavigation(fullNavigation)
         setError(null)
       } catch (err) {
-        console.error('Failed to build navigation:', err)
         setError('Failed to load navigation')
         
         // Fallback to static navigation

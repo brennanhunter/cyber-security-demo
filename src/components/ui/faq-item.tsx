@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { ReactNode } from 'react'
 
 interface FAQItemProps {
   question: string
-  answer: string
+  answer: string | ReactNode
 }
 
 export default function FAQItem({ question, answer }: FAQItemProps) {
@@ -24,7 +25,9 @@ export default function FAQItem({ question, answer }: FAQItemProps) {
       
       {isOpen && (
         <div className="pt-4">
-          <p className="font-alliance text-raisin-black/80 leading-relaxed">{answer}</p>
+          <div className="font-alliance text-raisin-black/80 leading-relaxed">
+            {typeof answer === 'string' ? <p>{answer}</p> : answer}
+          </div>
         </div>
       )}
     </div>

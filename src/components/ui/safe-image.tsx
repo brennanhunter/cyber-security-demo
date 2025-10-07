@@ -50,7 +50,6 @@ export default function SafeImage({
       />
     )
   } catch (error) {
-    console.warn('Error loading image:', error)
     return null
   }
 }

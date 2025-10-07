@@ -3,11 +3,11 @@ import { Shield, Mail, Phone, MapPin, Linkedin, Twitter, Github } from 'lucide-r
 
 const footerLinks = {
   services: [
-    { name: 'Penetration Testing', href: '/services/penetration-testing' },
-    { name: 'Red Team Operations', href: '/services/red-team' },
-    { name: 'Security Awareness Training', href: '/services/training' },
-    { name: 'Compliance Services', href: '/services/compliance' },
-    { name: 'Incident Response', href: '/services/incident-response' },
+    { name: 'Penetration Testing', href: '/penetration-testing' },
+    { name: 'Red Team Operations', href: '/red-team' },
+    { name: 'Security Awareness Training', href: '/training' },
+    { name: 'Compliance Services', href: '/compliance' },
+    { name: 'Incident Response', href: '/incident-response' },
   ],
   company: [
     { name: 'About Us', href: '/company/about' },

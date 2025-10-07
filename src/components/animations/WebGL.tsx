@@ -170,8 +170,9 @@ function compileShader(gl: WebGLRenderingContext | WebGL2RenderingContext, type:
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
 
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS))
-        console.trace(gl.getShaderInfoLog(shader));
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        // Shader compilation failed
+    }
 
     return shader;
 }
@@ -723,8 +724,9 @@ function createProgram(gl: WebGLRenderingContext | WebGL2RenderingContext, verte
     gl.attachShader(program, fragmentShader);
     gl.linkProgram(program);
 
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS))
-        console.trace(gl.getProgramInfoLog(program));
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        // Program linking failed
+    }
 
     return program;
 }
@@ -1576,10 +1578,6 @@ const WebGL: React.FC = () => {
       config.BLOOM = false;
       config.SUNRAYS = false;
     }
-
-    console.log('Pavel\'s WebGL fluid simulation initialized');
-    console.log('WebGL version:', gl.getParameter(gl.VERSION));
-    console.log('Linear filtering support:', ext.supportLinearFiltering);
 
     // Compile all shaders
     const baseVertexShader = compileShader(gl, gl.VERTEX_SHADER, baseVertexShaderSource);

@@ -1,0 +1,8 @@
+export { default as HeroSection } from './HeroSection'
+export { default as ScopeSection } from './ScopeSection'
+export { default as ProcessSection } from './ProcessSection'
+export { default as DeliverablesSection } from './DeliverablesSection'
+export { default as IndustriesClientsSection } from './IndustriesClientsSection'
+export { default as CaseStudiesSection } from './CaseStudiesSection'
+export { default as FAQSection } from './FAQSection'
+export { default as PricingSection } from './PricingSection'

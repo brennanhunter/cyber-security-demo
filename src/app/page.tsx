@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { ScrambleButton } from '@/components/ui/scramble-button'
 import PageWrapper from '@/components/layout/page-wrapper'
 import type { Metadata } from 'next'
 
@@ -57,9 +56,9 @@ export default function Home() {
             <Button variant="primary" size="lg" className="pulse-glow">
               Get Started
             </Button>
-            <ScrambleButton variant="cyber" size="lg">
+            <Button variant="cyber" size="lg">
               Schedule A Demonstration
-            </ScrambleButton>
+            </Button>
           </div>
         </div>
 

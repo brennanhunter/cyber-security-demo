@@ -6,9 +6,10 @@ export default defineType({
   title: 'Service Page',
   type: 'document',
   fields: [
+    // Basic Service Info
     {
       name: 'title',
-      title: 'Service Name',
+      title: 'Service Title',
       type: 'string',
       validation: (Rule: Rule) => Rule.required()
     },
@@ -22,268 +23,212 @@ export default defineType({
       },
       validation: (Rule: Rule) => Rule.required()
     },
+    
+    // MAIN FIELDS
     {
-      name: 'team',
-      title: 'Service Team',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Pentest Team', value: 'pentest-team' },
-          { title: 'AppSec Team', value: 'appsec-team' },
-          { title: 'Purple Team', value: 'purple-team' },
-          { title: 'Red Team', value: 'red-team' },
-          { title: 'Tiger Team', value: 'tiger-team' },
-          { title: 'BlackOps Team', value: 'blackops-team' }
-        ]
-      },
-      validation: (Rule: Rule) => Rule.required(),
-      description: 'Which team this service belongs to for navigation grouping'
-    },
-    {
-      name: 'displayName',
-      title: 'Display Name (for navigation)',
-      type: 'string',
-      description: 'Short name for navigation menus (e.g., "API Pen." instead of "API Penetration Testing")'
-    },
-    {
-      name: 'shortDescription',
-      title: 'Short Description',
-      type: 'text',
-      rows: 3,
-      description: 'Brief description for service cards and previews'
-    },
-    {
-      name: 'icon',
-      title: 'Service Icon',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Shield (Protection)', value: 'shield' },
-          { title: 'Lock (Security)', value: 'lock' },
-          { title: 'Eye (Monitoring)', value: 'eye' },
-          { title: 'Zap (Performance)', value: 'zap' },
-          { title: 'Scan (Analysis)', value: 'scan' },
-          { title: 'Code (Development)', value: 'code' },
-          { title: 'Network (Infrastructure)', value: 'network' },
-          { title: 'Alert (Incident Response)', value: 'alert' }
-        ]
-      }
-    },
-    {
-      name: 'heroSection',
-      title: 'Hero Section',
+      name: 'heroMedia',
+      title: 'Hero Media',
       type: 'object',
       fields: [
         {
-          name: 'headline',
-          title: 'Main Headline',
+          name: 'type',
+          title: 'Media Type',
           type: 'string',
-          description: 'Main headline like "Attacking to Protect: Your Best Defense is Our Attack!"'
+          options: {
+            list: [
+              { title: 'Image', value: 'image' },
+              { title: 'Video', value: 'video' },
+              { title: 'Animation', value: 'animation' }
+            ]
+          },
+          validation: (Rule: Rule) => Rule.required()
         },
         {
-          name: 'subtitle',
-          title: 'Subtitle',
-          type: 'text',
-          rows: 2,
-          description: 'Supporting text under the headline'
-        },
-        {
-          name: 'backgroundImage',
-          title: 'Background Image',
+          name: 'asset',
+          title: 'Media Asset',
           type: 'image',
+          description: 'Upload image, video, or animation file',
           options: {
             hotspot: true
           }
         },
         {
-          name: 'ctaText',
-          title: 'CTA Button Text',
+          name: 'alt',
+          title: 'Alt Text',
           type: 'string',
-          initialValue: 'Get in Touch'
+          description: 'Alternative text for accessibility (optional)'
         },
         {
-          name: 'ctaLink',
-          title: 'CTA Link',
-          type: 'string',
-          description: 'Contact form or external link'
-        },
-        {
-          name: 'brandLogo',
-          title: 'Brand Logo',
+          name: 'poster',
+          title: 'Video Poster Image',
           type: 'image',
-          description: 'Red Team logo or brand mark'
+          description: 'Thumbnail image for videos (optional)',
+          hidden: ({ parent }) => parent?.type !== 'video'
         }
       ]
     },
     {
-      name: 'focusSection',
-      title: 'Our Focus Section',
-      type: 'object',
-      description: 'The section with content on left and image on right',
-      fields: [
-        {
-          name: 'sectionTitle',
-          title: 'Section Title',
-          type: 'string',
-          description: 'e.g., "Our focus"'
-        },
-        {
-          name: 'mainHeading',
-          title: 'Main Heading',
-          type: 'string',
-          description: 'e.g., "Simulations: Revealing vulnerabilities and fortifying your defenses."'
-        },
-        {
-          name: 'description',
-          title: 'Description',
-          type: 'text',
-          rows: 6,
-          description: 'The detailed explanation paragraph'
-        },
-        {
-          name: 'ctaText',
-          title: 'CTA Button Text',
-          type: 'string',
-          initialValue: 'Get in Touch'
-        },
-        {
-          name: 'ctaLink',
-          title: 'CTA Link',
-          type: 'string'
-        },
-        {
-          name: 'sideImage',
-          title: 'Side Image',
-          type: 'image',
-          options: {
-            hotspot: true
-          },
-          description: 'Image to display on the right side'
-        }
-      ]
+      name: 'category',
+      title: 'Service Category',
+      type: 'reference',
+      to: [{ type: 'serviceCategory' }],
+      validation: (Rule: Rule) => Rule.required()
     },
     {
-      name: 'servicesGrid',
-      title: 'Services Grid ("What we do")',
-      type: 'object',
-      fields: [
+      name: 'overview',
+      title: 'Service Overview',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'Rich text overview of the service'
+    },
+    {
+      name: 'scope',
+      title: 'Service Scope',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'What is included in this service scope'
+    },
+
+    // ARRAYS / STRUCTURED OBJECTS
+    {
+      name: 'process',
+      title: 'Service Process',
+      type: 'array',
+      of: [
         {
-          name: 'sectionTitle',
-          title: 'Section Title',
-          type: 'string',
-          initialValue: 'What we do'
-        },
-        {
-          name: 'services',
-          title: 'Service Cards',
-          type: 'array',
-          of: [
+          type: 'object',
+          fields: [
             {
-              type: 'object',
-              fields: [
-                {
-                  name: 'icon',
-                  title: 'Service Icon',
-                  type: 'image',
-                  description: 'Red diamond icon or custom icon'
-                },
-                {
-                  name: 'title',
-                  title: 'Service Title',
-                  type: 'string',
-                  description: 'e.g., "Threat Alerts Validation"'
-                },
-                {
-                  name: 'description',
-                  title: 'Service Description',
-                  type: 'text',
-                  rows: 4
-                }
-              ],
-              preview: {
-                select: {
-                  title: 'title',
-                  subtitle: 'description'
-                }
+              name: 'title',
+              title: 'Process Step Title',
+              type: 'string',
+              validation: (Rule: Rule) => Rule.required()
+            },
+            {
+              name: 'detail',
+              title: 'Process Details',
+              type: 'array',
+              of: [{ type: 'block' }]
+            },
+            {
+              name: 'duration',
+              title: 'Duration',
+              type: 'string',
+              description: 'e.g., "2-3 days", "1 week"'
+            },
+            {
+              name: 'order',
+              title: 'Step Order',
+              type: 'number',
+              validation: (Rule: Rule) => Rule.required().min(1)
+            }
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              subtitle: 'duration',
+              order: 'order'
+            },
+            prepare({ title, subtitle, order }) {
+              return {
+                title: `${order}. ${title}`,
+                subtitle
               }
             }
-          ]
-        },
-        {
-          name: 'ctaText',
-          title: 'CTA Button Text',
-          type: 'string',
-          initialValue: 'Hire our services'
-        },
-        {
-          name: 'ctaLink',
-          title: 'CTA Link',
-          type: 'string'
+          }
         }
       ]
     },
     {
-      name: 'advantagesGrid',
-      title: 'Red Team Advantages Grid',
+      name: 'deliverables',
+      title: 'Service Deliverables',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'title',
+              title: 'Deliverable Title',
+              type: 'string',
+              validation: (Rule: Rule) => Rule.required()
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 3
+            },
+            {
+              name: 'format',
+              title: 'Deliverable Format',
+              type: 'string',
+              description: 'e.g., "PDF Report", "Excel Spreadsheet", "Video Presentation"'
+            },
+            {
+              name: 'order',
+              title: 'Display Order',
+              type: 'number',
+              validation: (Rule: Rule) => Rule.required().min(1)
+            }
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              subtitle: 'format',
+              order: 'order'
+            },
+            prepare({ title, subtitle, order }) {
+              return {
+                title: `${order}. ${title}`,
+                subtitle
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      name: 'extra1',
+      title: 'Additional Details 1',
       type: 'object',
+      description: 'Optional collapsible section for extra information',
+      options: {
+        collapsible: true,
+        collapsed: true
+      },
       fields: [
         {
-          name: 'sectionTitle',
-          title: 'Section Title',
-          type: 'string',
-          initialValue: 'Red Team Advantages'
-        },
-        {
-          name: 'subtitle',
-          title: 'Section Subtitle',
+          name: 'notes',
+          title: 'Notes',
           type: 'text',
-          rows: 2,
-          description: 'e.g., "Invest in robust defenses, proactive vulnerability identification..."'
+          rows: 4
         },
         {
-          name: 'advantages',
-          title: 'Advantage Cards',
+          name: 'technicalFields',
+          title: 'Technical Fields',
           type: 'array',
-          validation: (Rule: Rule) => Rule.max(9),
           of: [
             {
               type: 'object',
               fields: [
                 {
-                  name: 'number',
-                  title: 'Card Number',
-                  type: 'number',
-                  validation: (Rule: Rule) => Rule.min(1).max(9)
-                },
-                {
-                  name: 'title',
-                  title: 'Advantage Title',
+                  name: 'key',
+                  title: 'Field Name',
                   type: 'string',
-                  description: 'e.g., "Proactive Resilience Assessment"'
+                  validation: (Rule: Rule) => Rule.required()
                 },
                 {
-                  name: 'description',
-                  title: 'Advantage Description',
-                  type: 'text',
-                  rows: 3
-                },
-                {
-                  name: 'readMoreLink',
-                  title: 'Read More Link',
+                  name: 'value',
+                  title: 'Field Value',
                   type: 'string',
-                  description: 'Optional link for more details'
+                  validation: (Rule: Rule) => Rule.required()
                 }
               ],
               preview: {
                 select: {
-                  title: 'title',
-                  subtitle: 'number'
-                },
-                prepare({ title, subtitle }) {
-                  return {
-                    title,
-                    subtitle: `#${subtitle}`
-                  }
+                  title: 'key',
+                  subtitle: 'value'
                 }
               }
             }
@@ -292,62 +237,111 @@ export default defineType({
       ]
     },
     {
-      name: 'faqSection',
-      title: 'FAQ Section',
+      name: 'industries',
+      title: 'Target Industries',
+      type: 'array',
+      of: [
+        { type: 'reference', to: [{ type: 'industry' }] }
+      ]
+    },
+    {
+      name: 'clients',
+      title: 'Related Clients',
+      type: 'array',
+      of: [
+        { type: 'reference', to: [{ type: 'client' }] }
+      ]
+    },
+    {
+      name: 'caseStudies',
+      title: 'Related Case Studies',
+      type: 'array',
+      of: [
+        { type: 'reference', to: [{ type: 'caseStudy' }] }
+      ]
+    },
+    {
+      name: 'certs',
+      title: 'Related Certifications',
+      type: 'array',
+      of: [
+        { type: 'reference', to: [{ type: 'cert' }] }
+      ]
+    },
+    {
+      name: 'extra2',
+      title: 'Additional Details 2',
       type: 'object',
+      description: 'Optional collapsible section for more extra information',
+      options: {
+        collapsible: true,
+        collapsed: true
+      },
       fields: [
         {
-          name: 'sectionTitle',
-          title: 'Section Title',
-          type: 'string',
-          initialValue: 'Frequently asked questions'
-        },
-        {
-          name: 'subtitle',
-          title: 'Section Subtitle',
+          name: 'notes',
+          title: 'Notes',
           type: 'text',
-          rows: 2,
-          description: 'Text under the title'
+          rows: 4
         },
         {
-          name: 'ctaText',
-          title: 'CTA Button Text',
-          type: 'string',
-          initialValue: 'Get in Touch'
-        },
-        {
-          name: 'ctaLink',
-          title: 'CTA Link',
-          type: 'string'
-        },
-        {
-          name: 'faqs',
-          title: 'FAQ Questions',
+          name: 'technicalFields',
+          title: 'Technical Fields',
           type: 'array',
           of: [
             {
               type: 'object',
               fields: [
                 {
-                  name: 'question',
-                  title: 'Question',
-                  type: 'string'
+                  name: 'key',
+                  title: 'Field Name',
+                  type: 'string',
+                  validation: (Rule: Rule) => Rule.required()
                 },
                 {
-                  name: 'answer',
-                  title: 'Answer',
-                  type: 'text',
-                  rows: 4
+                  name: 'value',
+                  title: 'Field Value',
+                  type: 'string',
+                  validation: (Rule: Rule) => Rule.required()
                 }
               ],
               preview: {
                 select: {
-                  title: 'question',
-                  subtitle: 'answer'
+                  title: 'key',
+                  subtitle: 'value'
                 }
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      name: 'faqs',
+      title: 'Frequently Asked Questions',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'question',
+              title: 'Question',
+              type: 'string',
+              validation: (Rule: Rule) => Rule.required()
+            },
+            {
+              name: 'answer',
+              title: 'Answer',
+              type: 'array',
+              of: [{ type: 'block' }]
+            }
+          ],
+          preview: {
+            select: {
+              title: 'question'
+            }
+          }
         }
       ]
     },
@@ -357,29 +351,57 @@ export default defineType({
       type: 'object',
       fields: [
         {
-          name: 'startingPrice',
-          title: 'Starting Price',
-          type: 'number',
-          description: 'Starting price in USD'
-        },
-        {
           name: 'pricingModel',
           title: 'Pricing Model',
           type: 'string',
           options: {
             list: [
-              { title: 'One-time', value: 'one-time' },
-              { title: 'Monthly', value: 'monthly' },
-              { title: 'Annual', value: 'annual' },
-              { title: 'Custom Quote', value: 'custom' }
+              { title: 'Fixed Price', value: 'Fixed' },
+              { title: 'Time & Materials', value: 'T&M' },
+              { title: 'Subscription', value: 'Subscription' },
+              { title: 'Custom Quote', value: 'Custom' }
             ]
-          }
+          },
+          validation: (Rule: Rule) => Rule.required()
         },
         {
-          name: 'pricingDetails',
-          title: 'Pricing Details',
-          type: 'text',
-          rows: 3
+          name: 'pricingTiers',
+          title: 'Pricing Tiers',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                {
+                  name: 'label',
+                  title: 'Tier Label',
+                  type: 'string',
+                  validation: (Rule: Rule) => Rule.required(),
+                  description: 'e.g., "Basic", "Professional", "Enterprise"'
+                },
+                {
+                  name: 'priceRange',
+                  title: 'Price Range',
+                  type: 'string',
+                  validation: (Rule: Rule) => Rule.required(),
+                  description: 'e.g., "$5,000 - $10,000", "Starting at $2,500"'
+                },
+                {
+                  name: 'includes',
+                  title: 'What\'s Included',
+                  type: 'array',
+                  of: [{ type: 'string' }],
+                  description: 'List of features/services included in this tier'
+                }
+              ],
+              preview: {
+                select: {
+                  title: 'label',
+                  subtitle: 'priceRange'
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -392,8 +414,8 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'shortDescription',
-      media: 'heroSection.backgroundImage'
+      subtitle: 'category.title',
+      media: 'heroMedia.asset'
     }
   }
 })

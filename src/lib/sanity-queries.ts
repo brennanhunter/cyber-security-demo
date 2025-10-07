@@ -1,27 +1,47 @@
 import { client } from './sanity'
 import { groq } from 'next-sanity'
 
-// Get single service by slug
+// Get single service metadata (lightweight for generateMetadata)
+export async function getServiceMeta(slug: string) {
+  return client.fetch(groq`
+    *[_type == "service" && slug.current == $slug][0]{
+      title,
+      slug,
+      overview,
+      heroMedia{
+        alt,
+        "url": asset->url
+      },
+      seo
+    }
+  `, { slug }, { 
+    next: { revalidate: 3600 }, // Cache for 1 hour
+    cache: 'force-cache' 
+  })
+}
+
+// Get full service data (for page component)
 export async function getService(slug: string) {
   return client.fetch(groq`
     *[_type == "service" && slug.current == $slug][0]{
       title,
       slug,
-      shortDescription,
-      icon,
-      heroSection{
-        headline,
-        subtitle,
-        backgroundImage{
+      heroMedia{
+        type,
+        asset{
           asset->{
             _id,
-            url
-          },
-          alt
+            url,
+            metadata{
+              dimensions{
+                width,
+                height
+              }
+            }
+          }
         },
-        ctaText,
-        ctaLink,
-        brandLogo{
+        alt,
+        poster{
           asset->{
             _id,
             url
@@ -29,13 +49,38 @@ export async function getService(slug: string) {
           alt
         }
       },
-      focusSection{
-        sectionTitle,
-        mainHeading,
+      category->{
+        title,
+        slug,
         description,
-        ctaText,
-        ctaLink,
-        sideImage{
+        color
+      },
+      overview,
+      scope,
+      process[]{
+        title,
+        detail,
+        duration,
+        order
+      },
+      deliverables[]{
+        title,
+        description,
+        format,
+        order
+      },
+      extra1{
+        notes,
+        technicalFields[]{
+          key,
+          value
+        }
+      },
+      industries[]->{
+        title,
+        slug,
+        description,
+        icon{
           asset->{
             _id,
             url
@@ -43,47 +88,73 @@ export async function getService(slug: string) {
           alt
         }
       },
-      servicesGrid{
-        sectionTitle,
-        services[]{
-          icon{
-            asset->{
-              _id,
-              url
-            },
-            alt
+      clients[]->{
+        name,
+        slug,
+        logo{
+          asset->{
+            _id,
+            url
           },
-          title,
-          description
+          alt
         },
-        ctaText,
-        ctaLink
+        website,
+        isPublic
       },
-      advantagesGrid{
-        sectionTitle,
-        subtitle,
-        advantages[]{
-          number,
-          title,
-          description,
-          readMoreLink
+      caseStudies[]->{
+        title,
+        slug,
+        summary,
+        featuredImage{
+          asset->{
+            _id,
+            url
+          },
+          alt
+        },
+        timeline,
+        isPublic
+      },
+      certs[]->{
+        title,
+        slug,
+        issuer,
+        badge{
+          asset->{
+            _id,
+            url
+          },
+          alt
+        },
+        level,
+        description
+      },
+      extra2{
+        notes,
+        technicalFields[]{
+          key,
+          value
         }
       },
-      faqSection{
-        sectionTitle,
-        subtitle,
-        ctaText,
-        ctaLink,
-        faqs[]{
-          question,
-          answer
+      faqs[]{
+        question,
+        answer
+      },
+      pricing{
+        pricingModel,
+        pricingTiers[]{
+          label,
+          priceRange,
+          includes[]
         }
       },
-      pricing,
       seo,
       _id
     }
-  `, { slug })
+  `, { slug }, { 
+    next: { revalidate: 3600 }, // Cache for 1 hour
+    cache: 'force-cache' 
+  })
 }
 
 // Get all services (for generating static paths)
@@ -92,7 +163,10 @@ export async function getAllServices() {
     *[_type == "service"]{
       slug
     }
-  `)
+  `, {}, { 
+    next: { revalidate: 3600 }, // Cache for 1 hour
+    cache: 'force-cache' 
+  })
 }
 
 // Get services for listing (homepage, services overview)
@@ -113,7 +187,10 @@ export async function getServices() {
         pricingModel
       }
     }
-  `)
+  `, {}, { 
+    next: { revalidate: 3600 }, // Cache for 1 hour
+    cache: 'force-cache' 
+  })
 }
 
 // Get testimonials
@@ -132,7 +209,10 @@ export async function getTestimonials() {
         slug
       }
     }
-  `)
+  `, {}, { 
+    next: { revalidate: 1800 }, // Cache for 30 minutes
+    cache: 'force-cache' 
+  })
 }
 
 // Get simple pages (privacy, terms, etc.)
@@ -145,19 +225,27 @@ export async function getSimplePage(slug: string) {
       lastUpdated,
       seo
     }
-  `, { slug })
+  `, { slug }, { 
+    next: { revalidate: 3600 }, // Cache for 1 hour
+    cache: 'force-cache' 
+  })
 }
 
 // Get services grouped by teams for navigation
 export async function getServicesForNavigation() {
   return client.fetch(groq`
-    *[_type == "service" && defined(team)] | order(team asc, title asc){
+    *[_type == "service"] | order(category->title asc, title asc){
       title,
-      displayName,
       slug,
-      team
+      category->{
+        title,
+        slug
+      }
     }
-  `)
+  `, {}, { 
+    next: { revalidate: 1800 }, // Cache for 30 minutes
+    cache: 'force-cache' 
+  })
 }
 
 // Get team pages (for team landing pages)
@@ -177,5 +265,8 @@ export async function getTeamServices(team: string) {
         pricingModel
       }
     }
-  `, { team })
+  `, { team }, { 
+    next: { revalidate: 1800 }, // Cache for 30 minutes
+    cache: 'force-cache' 
+  })
 }
