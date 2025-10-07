@@ -781,3 +781,16 @@ body {
 .animate-spin-reverse {
   animation: spin-reverse 15s linear infinite;
 }
+
+/* Custom counter styles for numbered lists */
+.counter-reset-scope {
+  counter-reset: scope-counter;
+}
+
+.counter-increment-scope {
+  counter-increment: scope-counter;
+}
+
+.counter-scope::before {
+  content: counter(scope-counter);
+}

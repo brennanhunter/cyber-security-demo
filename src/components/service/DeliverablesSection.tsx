@@ -1,3 +1,8 @@
+'use client'
+
+import ScrambleText, { ScrambleTextHandle } from '@/components/animations/scramble-text'
+import { useRef } from 'react'
+
 interface Deliverable {
   title: string
   description: string
@@ -9,8 +14,6 @@ interface DeliverablesSectionProps {
   service: {
     deliverables?: Deliverable[]
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  richTextComponents: any
 }
 
 // Icon mapping based on deliverable format
@@ -73,7 +76,9 @@ const getDeliverableIcon = (format: string) => {
   )
 }
 
-export default function DeliverablesSection({ service, richTextComponents }: DeliverablesSectionProps) {
+export default function DeliverablesSection({ service }: DeliverablesSectionProps) {
+  const portfolioButtonRef = useRef<ScrambleTextHandle>(null)
+
   if (!service.deliverables || service.deliverables.length === 0) {
     return null
   }
@@ -82,45 +87,81 @@ export default function DeliverablesSection({ service, richTextComponents }: Del
   const sortedDeliverables = [...service.deliverables].sort((a, b) => a.order - b.order)
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-24 bg-gradient-to-br from-charcoal-gray via-raisin-black to-charcoal-gray overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-cyber-cyan/10 to-transparent rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-steel-pink/10 to-transparent rounded-full blur-3xl"></div>
+      
+      {/* Floating Elements */}
+      <div className="absolute top-40 left-16 opacity-20 hidden lg:block">
+        <div className="w-6 h-6 bg-electric-violet/30 transform rotate-45 animate-spin-slow"></div>
+      </div>
+      <div className="absolute bottom-32 right-24 opacity-15 hidden lg:block">
+        <div className="w-8 h-8 border-2 border-cyber-cyan/50 rounded-full animate-pulse"></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            What You&apos;ll Receive
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-steel-pink/20 to-cyber-cyan/20 border border-steel-pink/30 rounded-full text-cyber-cyan text-sm font-medium mb-6 backdrop-blur-sm font-alliance">
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2-2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+            </svg>
+            Comprehensive Deliverables
+          </div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-ghost-white mb-6 leading-tight font-alliance">
+            <span className="text-gradient-cyber">
+              What You&apos;ll Receive
+            </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Comprehensive deliverables designed to provide immediate value and long-term security for your organization.
+          
+          <div className="flex items-center justify-center mb-8">
+            <div className="h-px bg-gradient-to-r from-transparent via-steel-pink to-transparent w-32"></div>
+            <div className="w-3 h-3 bg-steel-pink rounded-full mx-4 animate-pulse"></div>
+            <div className="h-px bg-gradient-to-r from-transparent via-cyber-cyan to-transparent w-32"></div>
+          </div>
+
+          <p className="text-xl text-ghost-white/70 max-w-3xl mx-auto font-alliance">
+            Actionable intelligence and comprehensive documentation designed to provide immediate value and establish long-term security resilience.
           </p>
         </div>
 
-        {/* Deliverables Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {/* Enhanced Deliverables Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {sortedDeliverables.map((deliverable, index) => (
             <div 
               key={deliverable.order}
-              className="group relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              className="group relative bg-gradient-to-br from-charcoal-gray/80 to-raisin-black/60 backdrop-blur-xl rounded-2xl p-8 border border-steel-pink/20 hover:border-steel-pink/40 hover:shadow-2xl hover:shadow-steel-pink/10 transition-all duration-500 transform hover:-translate-y-3"
             >
-              {/* Order Badge */}
-              <div className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+              {/* Background Effects */}
+              <div className="absolute inset-0 bg-gradient-to-r from-steel-pink/5 via-transparent to-cyber-cyan/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Enhanced Order Badge */}
+              <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-r from-steel-pink to-cyber-cyan text-white rounded-full flex items-center justify-center text-lg font-bold shadow-xl group-hover:scale-110 transition-transform duration-300 border-4 border-raisin-black">
                 {deliverable.order}
               </div>
 
-              {/* Icon */}
-              <div className="mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl flex items-center justify-center text-blue-600 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
+              {/* Enhanced Icon */}
+              <div className="mb-8 relative z-10">
+                <div className="w-20 h-20 bg-gradient-to-r from-cyber-cyan/20 to-electric-violet/20 rounded-2xl flex items-center justify-center text-cyber-cyan group-hover:from-cyber-cyan/30 group-hover:to-electric-violet/30 group-hover:scale-105 transition-all duration-300 border border-cyber-cyan/30">
                   {getDeliverableIcon(deliverable.format)}
                 </div>
+                
+                {/* Floating Animation Dots */}
+                <div className="absolute -top-2 -right-2 w-4 h-4 bg-steel-pink rounded-full animate-ping opacity-75"></div>
+                <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-cyber-cyan rounded-full animate-pulse opacity-60"></div>
               </div>
 
-              {/* Content */}
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+              {/* Enhanced Content */}
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold text-ghost-white mb-4 font-alliance group-hover:text-cyber-cyan transition-colors duration-300">
                   {deliverable.title}
                 </h3>
                 
-                <div className="mb-4">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800">
+                <div className="mb-6">
+                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-cyber-cyan/20 to-electric-violet/20 text-cyber-cyan border border-cyber-cyan/30 backdrop-blur-sm font-alliance">
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
@@ -128,69 +169,95 @@ export default function DeliverablesSection({ service, richTextComponents }: Del
                   </span>
                 </div>
 
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-ghost-white/80 leading-relaxed">
                   {deliverable.description}
                 </p>
               </div>
 
-              {/* Hover Effect Border */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none"></div>
+              {/* Animated Bottom Border */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-steel-pink via-cyber-cyan to-electric-violet rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           ))}
         </div>
 
-        {/* Value Proposition */}
-        <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-cyan-50 rounded-3xl p-8 lg:p-12">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-8">
-              <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        {/* Enhanced Value Proposition */}
+        <div className="relative bg-gradient-to-br from-charcoal-gray/80 to-raisin-black/60 backdrop-blur-xl border border-steel-pink/20 rounded-3xl p-8 lg:p-12 shadow-2xl">
+          {/* Background Effects */}
+          <div className="absolute inset-0 bg-gradient-to-r from-steel-pink/5 via-transparent to-cyber-cyan/5 rounded-3xl"></div>
+          
+          <div className="relative z-10 max-w-4xl mx-auto text-center">
+            <div className="mb-12">
+              <div className="w-24 h-24 bg-gradient-to-r from-steel-pink to-cyber-cyan rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
               </div>
               
-              <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
-                Quality Guaranteed
+              <h3 className="text-3xl lg:text-4xl font-bold text-ghost-white mb-6 font-alliance">
+                <span className="text-gradient-cyber">Excellence Guaranteed</span>
               </h3>
               
-              <p className="text-lg text-gray-600 mb-8">
-                Every deliverable undergoes rigorous quality assurance and is backed by our commitment to excellence. 
-                You&apos;ll receive actionable insights, not just reports.
+              <p className="text-xl text-ghost-white/80 mb-12 max-w-2xl mx-auto">
+                Every deliverable undergoes rigorous quality assurance and is backed by our commitment to cybersecurity excellence. 
+                You&apos;ll receive actionable intelligence, not just documentation.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <div className="text-center group">
+                <div className="w-16 h-16 bg-gradient-to-r from-steel-pink/20 to-cyber-cyan/20 backdrop-blur-sm border border-steel-pink/30 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-8 h-8 text-steel-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Fast Delivery</h4>
-                <p className="text-sm text-gray-600">Quick turnaround without compromising quality</p>
+                <h4 className="font-bold text-ghost-white mb-2 font-alliance">Rapid Deployment</h4>
+                <p className="text-sm text-ghost-white/70">Strategic turnaround optimized for immediate impact</p>
               </div>
 
-              <div className="text-center">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
-                  <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="text-center group">
+                <div className="w-16 h-16 bg-gradient-to-r from-cyber-cyan/20 to-electric-violet/20 backdrop-blur-sm border border-cyber-cyan/30 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-8 h-8 text-cyber-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
                   </svg>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Customized</h4>
-                <p className="text-sm text-gray-600">Tailored specifically for your organization</p>
+                <h4 className="font-bold text-ghost-white mb-2 font-alliance">Threat-Specific</h4>
+                <p className="text-sm text-ghost-white/70">Customized for your unique threat landscape</p>
               </div>
 
-              <div className="text-center">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
-                  <svg className="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="text-center group">
+                <div className="w-16 h-16 bg-gradient-to-r from-electric-violet/20 to-steel-pink/20 backdrop-blur-sm border border-electric-violet/30 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-8 h-8 text-electric-violet" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Ongoing Support</h4>
-                <p className="text-sm text-gray-600">Continued assistance beyond delivery</p>
+                <h4 className="font-bold text-ghost-white mb-2 font-alliance">Continuous Intel</h4>
+                <p className="text-sm text-ghost-white/70">Ongoing threat intelligence and strategic support</p>
               </div>
+            </div>            {/* Enhanced CTA */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button 
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-steel-pink to-cyber-cyan hover:from-steel-pink/80 hover:to-cyber-cyan/80 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 pulse-glow font-alliance"
+                onMouseEnter={() => portfolioButtonRef.current?.startScramble()}
+              >
+                <ScrambleText ref={portfolioButtonRef}>
+                  Download Sample Portfolio
+                </ScrambleText>
+                <svg className="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </button>
+              
+              <button className="inline-flex items-center px-8 py-4 border-2 border-cyber-cyan/50 text-cyber-cyan hover:border-cyber-cyan hover:bg-cyber-cyan/10 font-semibold rounded-lg transition-all duration-300 backdrop-blur-sm font-alliance">
+                <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+                Discuss Requirements
+              </button>
             </div>
           </div>
+
+          {/* Animated Border */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-steel-pink via-cyber-cyan to-electric-violet rounded-b-3xl opacity-50"></div>
         </div>
       </div>
     </section>
