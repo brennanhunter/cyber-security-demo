@@ -52,7 +52,9 @@ export default function Header() {
   };
 
   const handleDropdownToggle = (itemName: string) => {
-    setActiveDropdown(activeDropdown === itemName ? null : itemName);
+    const newActiveDropdown = activeDropdown === itemName ? null : itemName;
+    setActiveDropdown(newActiveDropdown);
+    // Reset submenu when closing dropdown or switching to a new one
     setActiveSubmenu(null);
   };
 
@@ -238,24 +240,26 @@ export default function Header() {
                 navigation.map((item) => (
                 <div key={item.name}>
                   <div className="flex items-center justify-between">
-                    <Link
-                      href={item.href}
-                      className="block px-4 py-3 text-gray-300 hover:text-white text-base font-medium flex-1 rounded-lg hover:bg-white/5 transition-all duration-200 font-alliance"
-                      onClick={() => !item.hasDropdown && setIsMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                    {item.hasDropdown && (
+                    {item.hasDropdown ? (
                       <button
                         onClick={() => handleDropdownToggle(item.name)}
-                        className="px-4 py-3 text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200"
+                        className="flex items-center justify-between w-full px-4 py-3 text-gray-300 hover:text-white text-base font-medium rounded-lg hover:bg-white/5 transition-all duration-200 font-alliance text-left"
                       >
+                        <span>{item.name}</span>
                         <ChevronDown 
                           className={`h-4 w-4 transition-transform duration-300 ${
                             activeDropdown === item.name ? 'rotate-180' : ''
                           }`} 
                         />
                       </button>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className="block px-4 py-3 text-gray-300 hover:text-white text-base font-medium flex-1 rounded-lg hover:bg-white/5 transition-all duration-200 font-alliance"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
                     )}
                   </div>
                   
@@ -267,21 +271,23 @@ export default function Header() {
                           {isSubmenuItem(subItem) ? (
                             <>
                               <div
-                                className="flex items-center justify-between px-4 py-2 text-sm text-gray-400 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200 cursor-pointer font-alliance"
-                                onClick={() => handleDropdownToggle(`mobile-${subItem.name}`)}
+                                className="flex items-center justify-between px-4 py-3 text-sm text-gray-400 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200 cursor-pointer font-alliance"
+                                onClick={() => setActiveSubmenu(activeSubmenu === subItem.name ? null : subItem.name)}
                               >
-                                <Link href={subItem.href} className="flex-1">
+                                <Link href={subItem.href} className="flex-1" onClick={(e) => e.stopPropagation()}>
                                   {subItem.name}
                                 </Link>
-                                <ChevronDown 
-                                  className={`h-3 w-3 transition-transform duration-300 ${
-                                    activeDropdown === `mobile-${subItem.name}` ? 'rotate-180' : ''
-                                  }`} 
-                                />
+                                <div className="p-2 -m-2 flex items-center justify-center">
+                                  <ChevronDown 
+                                    className={`h-5 w-5 transition-transform duration-300 ${
+                                      activeSubmenu === subItem.name ? 'rotate-180' : ''
+                                    }`} 
+                                  />
+                                </div>
                               </div>
                               
                               {/* Mobile Submenu */}
-                              {activeDropdown === `mobile-${subItem.name}` && (
+                              {activeSubmenu === subItem.name && (
                                 <div className="pl-4 space-y-1 mt-1">
                                   {subItem.submenuItems.map((submenuItem: BaseNavItem) => (
                                     <Link
